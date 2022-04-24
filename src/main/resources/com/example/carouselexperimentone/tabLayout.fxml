@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Tab?>
+<?import javafx.scene.control.TabPane?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
+
+<TabPane fx:id="tabPane" maxHeight="-Infinity" maxWidth="-Infinity" side="LEFT" tabClosingPolicy="UNAVAILABLE" xmlns="http://javafx.com/javafx/18" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.carouselexperimentone.carouselController">
+    <Tab fx:id="tab1" text="Java">
+        <AnchorPane fx:id="tab1Pane" minHeight="0.0" minWidth="0.0">
+                  <ImageView fx:id="imageViewTab1" pickOnBounds="true" preserveRatio="true"/>
+               </AnchorPane>
+    </Tab>
+    <Tab fx:id="tab2" text="infraVis">
+        <AnchorPane fx:id="tab2Pane">
+                  <ImageView fx:id="imageViewTab2" pickOnBounds="true" preserveRatio="true" />
+               </AnchorPane>
+    </Tab>
+</TabPane>

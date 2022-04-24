@@ -114,7 +114,7 @@
                         <id>default-cli</id>
                         <configuration>
                             <mainClass>
-                                com.example.carouselexperimentone/com.example.carouselexperimentone.HelloApplication
+                                com.example.carouselexperimentone/com.example.carouselexperimentone.Main
                             </mainClass>
                             <launcher>app</launcher>
                             <jlinkZipName>app</jlinkZipName>

@@ -17,8 +17,8 @@ public class Main extends Application {
         AnchorPane anchorPane = new AnchorPane(imageView);
         Scene scene = new Scene(anchorPane);
         stage.setScene(scene);
-        imageView.fitHeightProperty().bind(scene.heightProperty());
-        imageView.fitWidthProperty().bind(scene.widthProperty());
+        imageView.fitHeightProperty().bind(anchorPane.heightProperty());
+        imageView.fitWidthProperty().bind(anchorPane.widthProperty());
         stage.show();
     }
 

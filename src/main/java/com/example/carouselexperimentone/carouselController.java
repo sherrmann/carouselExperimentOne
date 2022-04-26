@@ -24,14 +24,14 @@ public class carouselController {
     @FXML
     ImageView imageViewTab2;
     @FXML
-    HBox hBox;
+    HBox tab1HBox;
 
     @FXML
     public void initialize() {
         try {
             Image imageTab1 = new Image(getClass().getResourceAsStream("CollectionsCheatSheet.png"));
             imageViewTab1.setImage(imageTab1);
-            imageViewTab1.fitWidthProperty().bind(hBox.heightProperty());
+            imageViewTab1.fitWidthProperty().bind(tab1HBox.heightProperty());
         }
         catch(NullPointerException e){
             e.printStackTrace();

@@ -6,6 +6,7 @@ import javafx.scene.control.TabPane;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.AnchorPane;
+import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.HBox;
 
 public class carouselController {
@@ -14,7 +15,7 @@ public class carouselController {
     @FXML
     Tab tab1;
     @FXML
-    AnchorPane tab1Pane;
+    BorderPane borderPaneTab1;
     @FXML
     ImageView imageViewTab1;
     @FXML
@@ -24,14 +25,11 @@ public class carouselController {
     @FXML
     ImageView imageViewTab2;
     @FXML
-    HBox tab1HBox;
-
-    @FXML
     public void initialize() {
         try {
             Image imageTab1 = new Image(getClass().getResourceAsStream("CollectionsCheatSheet.png"));
             imageViewTab1.setImage(imageTab1);
-            imageViewTab1.fitWidthProperty().bind(tab1HBox.heightProperty());
+            imageViewTab1.fitWidthProperty().bind(borderPaneTab1.heightProperty());
         }
         catch(NullPointerException e){
             e.printStackTrace();

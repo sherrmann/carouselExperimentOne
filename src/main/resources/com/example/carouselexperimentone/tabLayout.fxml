@@ -5,20 +5,20 @@
 <?import javafx.scene.image.Image?>
 <?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.AnchorPane?>
-<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.BorderPane?>
 
 <TabPane fx:id="tabPane" maxHeight="-Infinity" maxWidth="-Infinity" prefHeight="573.0" prefWidth="613.0" side="LEFT" tabClosingPolicy="UNAVAILABLE" xmlns="http://javafx.com/javafx/18" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.carouselexperimentone.carouselController">
     <Tab fx:id="tab1" text="Java">
       <content>
-         <HBox fx:id="tab1HBox" alignment="CENTER" prefHeight="100.0" prefWidth="200.0">
-            <children>
-               <ImageView fx:id="imageViewTab1" fitWidth="600.0" pickOnBounds="true" preserveRatio="true">
+         <BorderPane fx:id="borderPaneTab1" prefHeight="200.0" prefWidth="200.0">
+            <center>
+               <ImageView fx:id="imageViewTab1" fitWidth="600.0" pickOnBounds="true" preserveRatio="true" BorderPane.alignment="CENTER">
                   <image>
                      <Image url="@CollectionsCheatSheet.png" />
                   </image>
                </ImageView>
-            </children>
-         </HBox>
+            </center>
+         </BorderPane>
       </content>
     </Tab>
     <Tab fx:id="tab2" text="infraVis">

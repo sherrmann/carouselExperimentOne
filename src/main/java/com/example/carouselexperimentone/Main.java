@@ -2,6 +2,8 @@ package com.example.carouselexperimentone;
 
 import javafx.application.Application;
 import javafx.scene.Scene;
+import javafx.scene.control.Tab;
+import javafx.scene.control.TabPane;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.AnchorPane;
@@ -10,13 +12,14 @@ import javafx.stage.Stage;
 public class Main extends Application {
     @Override
     public void start(Stage stage) {
-        ImageView imageView = new ImageView(new Image(getClass().getResourceAsStream("CollectionsCheatSheet.png")));
+        Image image = new Image(getClass().getResourceAsStream("CollectionsCheatSheet.png"));
+        ImageView imageView = new ImageView(image);
         imageView.setPreserveRatio(true);
-        AnchorPane anchorPane = new AnchorPane(imageView);
-        Scene scene = new Scene(anchorPane);
+        ImageViewPane imageViewPane = new ImageViewPane(imageView);
+        Tab tab1 = new Tab("Java", imageViewPane);
+        TabPane tabPane = new TabPane(tab1);
+        Scene scene = new Scene(tabPane);
         stage.setScene(scene);
-        imageView.fitHeightProperty().bind(anchorPane.heightProperty()); // bind(scene... works as well
-        imageView.fitWidthProperty().bind(anchorPane.widthProperty());  // bind(stage... cuts parts of the image off
         stage.show();
     }
 

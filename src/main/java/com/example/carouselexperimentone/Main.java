@@ -9,8 +9,24 @@ import javafx.scene.image.ImageView;
 import javafx.scene.layout.AnchorPane;
 import javafx.stage.Stage;
 
-// Thank you, thank you, thank you!!!
-// https://stackoverflow.com/questions/48804283/javafx-imageview-fits-container
+/* Thank you, thank you, thank you!!!
+ https://stackoverflow.com/questions/48804283/javafx-imageview-fits-container
+
+ add this to FXML:
+ <?import PATH.TO.CLASS.ImageViewPane?>
+
+<ImageViewPane fx:id="imageViewPane">
+  <imageView>
+    <ImageView fx:id="imageView"
+               pickOnBounds="true"
+               preserveRatio="true">
+    </ImageView>
+  </imageView>
+</ImageViewPane>
+
+
+*/
+
 public class Main extends Application {
     @Override
     public void start(Stage stage) {

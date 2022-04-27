@@ -1,14 +1,17 @@
 package com.example.carouselexperimentone;
 
 import javafx.application.Application;
+import javafx.geometry.Side;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.Tab;
 import javafx.scene.control.TabPane;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
-import javafx.scene.layout.*;
-import javafx.scene.paint.Color;
+import javafx.scene.layout.AnchorPane;
+import javafx.scene.layout.HBox;
+import javafx.scene.layout.Priority;
+import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
 
 /* Thank you, thank you, thank you!!!
@@ -44,7 +47,10 @@ public class Main extends Application {
         VBox vBox = new VBox(imageViewPane, bottomMenu);
         VBox.setVgrow(imageViewPane, Priority.ALWAYS);
         Tab tab1 = new Tab("Java", vBox);
-        TabPane tabPane = new TabPane(tab1);
+        Tab tab2 = new Tab("Git", new AnchorPane());
+        Tab tab3 = new Tab("IntelliJ", new HBox());
+        TabPane tabPane = new TabPane(tab1, tab2, tab3);
+        tabPane.setSide(Side.LEFT);
         Scene scene = new Scene(tabPane);
         stage.setScene(scene);
         stage.show();

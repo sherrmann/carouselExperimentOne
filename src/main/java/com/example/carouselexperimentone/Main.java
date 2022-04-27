@@ -40,15 +40,10 @@ public class Main extends Application {
         Button button2 = new Button("change Image");
         Button button3 = new Button("add Image");
         Button button4 = new Button("right");
-//        button.set
         HBox bottomMenu = new HBox(button, button2, button3, button4);
         VBox vBox = new VBox(imageViewPane, bottomMenu);
-        VBox.setVgrow(vBox, Priority.ALWAYS);
         VBox.setVgrow(imageViewPane, Priority.ALWAYS);
-        vBox.setBackground(new Background(new BackgroundFill(Color.YELLOW, null, null)));
-        bottomMenu.setBackground(new Background(new BackgroundFill(Color.RED, null, null)));
         Tab tab1 = new Tab("Java", vBox);
-        vBox.setFillWidth(true);
         TabPane tabPane = new TabPane(tab1);
         Scene scene = new Scene(tabPane);
         stage.setScene(scene);

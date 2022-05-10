@@ -42,6 +42,7 @@ public class CarouselController {
             deleteMenuItem = new MenuItem("delete Image");
             menuButton = new MenuButton("Menu", null, addMenuItem, changeMenuItem, deleteMenuItem);
             menuHBox = new HBox(menuButton, leftButton, rightButton);
+            menuHBox.setSpacing(10);
             defaultVBox.getChildren().addAll(imageViewPane, menuHBox);
             tabPane.setSide(Side.LEFT);
     }

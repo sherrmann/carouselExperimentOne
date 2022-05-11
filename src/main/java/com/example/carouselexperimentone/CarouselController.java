@@ -33,6 +33,7 @@ public class CarouselController {
             Image image = new Image(url.toString());
             imageView = new ImageView(image);
             imageView.setPreserveRatio(true);
+            imageView.setSmooth(true);
             imageViewPane = new ImageViewPane(imageView);
             VBox.setVgrow(imageViewPane, Priority.ALWAYS);
             leftButton = new Button("left");

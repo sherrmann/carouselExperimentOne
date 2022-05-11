@@ -1,5 +1,6 @@
 package com.example.carouselexperimentone;
 
+import javafx.event.Event;
 import javafx.fxml.FXML;
 import javafx.geometry.Side;
 import javafx.scene.control.*;
@@ -29,14 +30,15 @@ public class CarouselController {
 
     public void initialize(){
             url = getClass().getResource("CollectionsCheatSheet.png");
-            String urlString = (url.toString() == null) ? "null" : url.toString();
-            Image image = new Image( (url.toString() == null) ? "null" : url.toString() );
+            Image image = new Image(url.toString());
             imageView = new ImageView(image);
             imageView.setPreserveRatio(true);
             imageViewPane = new ImageViewPane(imageView);
             VBox.setVgrow(imageViewPane, Priority.ALWAYS);
             leftButton = new Button("left");
+            leftButton.setOnAction(this::setLeftButton);
             rightButton = new Button("right");
+            rightButton.setOnAction((this::setRightButton));
             addMenuItem = new MenuItem("add Image");
             changeMenuItem = new MenuItem("change Image");
             deleteMenuItem = new MenuItem("delete Image");
@@ -45,6 +47,14 @@ public class CarouselController {
             menuHBox.setSpacing(10);
             defaultVBox.getChildren().addAll(imageViewPane, menuHBox);
             tabPane.setSide(Side.LEFT);
+    }
+    public void setLeftButton(Event event){
+        Image image = new Image(getClass().getResource("java-cheatsheet.jpg").toString());
+        imageView.setImage(image);
+    }
+    public void setRightButton(Event event){
+        Image image = new Image(getClass().getResource("intellij.png").toString());
+        imageView.setImage(image);
     }
 
 }

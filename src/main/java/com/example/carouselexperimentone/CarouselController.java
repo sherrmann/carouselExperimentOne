@@ -28,32 +28,25 @@ public class CarouselController {
     MenuItem addMenuItem, changeMenuItem, deleteMenuItem;
     Button leftButton, rightButton;
 
-    public void initialize(){
-            url = getClass().getResource("CollectionsCheatSheet.png");
-            Image image = new Image(url.toString());
-            imageView = new ImageView(image);
-            imageView.setPreserveRatio(true);
-            imageView.setSmooth(true);
-            imageViewPane = new ImageViewPane(imageView);
-            VBox.setVgrow(imageViewPane, Priority.ALWAYS);
-            leftButton = new Button("left");
-            leftButton.setOnAction(this::setLeftButton);
-            rightButton = new Button("right");
-            rightButton.setOnAction((this::setRightButton));
-            addMenuItem = new MenuItem("add Image");
-            changeMenuItem = new MenuItem("change Image");
-            deleteMenuItem = new MenuItem("delete Image");
-            menuButton = new MenuButton("Menu", null, addMenuItem, changeMenuItem, deleteMenuItem);
-            menuHBox = new HBox(menuButton, leftButton, rightButton);
-            menuHBox.setSpacing(10);
-            defaultVBox.getChildren().addAll(imageViewPane, menuHBox);
-            tabPane.setSide(Side.LEFT);
+    public void initialize() {
+        // image
+        url = getClass().getResource("CollectionsCheatSheet.png");
+        Image image = new Image(url.toString());
+        imageView = new ImageView(image);
+        imageView.setPreserveRatio(true);
+        imageView.setSmooth(true);
+        imageViewPane = new ImageViewPane(imageView);
+        VBox.setVgrow(imageViewPane, Priority.ALWAYS);
+        defaultVBox.getChildren().add(0, imageViewPane);
+        tabPane.setSide(Side.LEFT);
     }
-    public void setLeftButton(Event event){
+
+    public void setLeftButton(Event event) {
         Image image = new Image(getClass().getResource("java-cheatsheet.jpg").toString());
         imageView.setImage(image);
     }
-    public void setRightButton(Event event){
+
+    public void setRightButton(Event event) {
         Image image = new Image(getClass().getResource("intellij.png").toString());
         imageView.setImage(image);
     }

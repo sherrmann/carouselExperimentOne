@@ -22,7 +22,7 @@ public class CarouselController {
 
     public void initialize() {
         // image
-        Image image = new Image("file:src/main/resources/com/example/carouselexperimentone/CollectionsCheatSheet.png");
+        Image image = new Image("file:src/main/resources/com/example/carouselexperimentone/documents/CollectionsCheatSheet.png");
         imageView = new ImageView(image);
         imageView.setPreserveRatio(true);
         imageView.setSmooth(true);

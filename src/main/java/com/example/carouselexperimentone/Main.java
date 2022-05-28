@@ -1,5 +1,6 @@
 package com.example.carouselexperimentone;
 
+import com.example.carouselexperimentone.carouselModel.CarouselTab;
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
@@ -36,7 +37,8 @@ public class Main extends Application {
     }
 
     public static void main(String[] args) throws IOException {
-        Controller.test();
+        var tab = new CarouselTab("test");
+        System.out.println(tab.getFilesInTabFolder(Controller.getCarouselPath()));
         launch();
     }
 }

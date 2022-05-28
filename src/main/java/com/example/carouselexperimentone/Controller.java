@@ -3,18 +3,26 @@ package com.example.carouselexperimentone;
 import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Path;
-import java.nio.file.Paths;
+import java.util.List;
 import java.util.stream.Stream;
 
 public class Controller {
+    private static Path carouselPath = Path.of(
+            "C:\\Users\\bubuf\\OneDrive - The Open University\\Documents\\DocumentCarousel");
+    private Path carousel;
+    private List<Path> tabs;
+
+    public static Path getCarouselPath() {
+        return carouselPath;
+    }
+
     public static void test() throws IOException {
-        String pathString = System.getProperty("user.home") + "\\Documents";
-        Path path = Paths.get(pathString);
+//        collect tabs and images
         try {
-            Stream<Path> paths = Files.walk(path,1);
+            Stream<Path> paths = Files.list(carouselPath);
             paths.forEach(System.out::println);
-        } catch(Exception e)
-        {
+
+        } catch (Exception e) {
             e.printStackTrace();
         }
     }

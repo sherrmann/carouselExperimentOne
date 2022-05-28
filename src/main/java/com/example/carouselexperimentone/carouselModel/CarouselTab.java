@@ -22,7 +22,7 @@ public class CarouselTab {
         try (Stream<Path> stream = Files.walk(dir,1)){
             return stream
                     .filter(file -> !Files.isDirectory(file))
-                    .map(Path::getFileName)
+                    .map(Path::toAbsolutePath)
                     .collect(Collectors.toSet());
         }
         catch (Exception e){

@@ -8,7 +8,7 @@ import java.util.stream.Stream;
 
 public class Controller {
     private static Path carouselPath = Path.of(
-            "C:\\Users\\bubuf\\OneDrive - The Open University\\Documents\\DocumentCarousel");
+            "C:\\Users\\bubuf\\OneDrive - The Open University\\Documents\\DocumentCarousel\\Carousel1");
     private Path carousel;
     private List<Path> tabs;
 

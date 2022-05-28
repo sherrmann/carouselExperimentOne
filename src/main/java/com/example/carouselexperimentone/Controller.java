@@ -21,6 +21,7 @@ public class Controller {
         try(Stream<Path> stream = Files.walk(carouselPath,1)){
             return stream
                     .filter((Files::isDirectory))
+                    .filter(path -> (!path.equals(carouselPath)))
                     .map(path -> new CarouselTab(path.getFileName().toString(), path))
                     .collect(Collectors.toList());
 

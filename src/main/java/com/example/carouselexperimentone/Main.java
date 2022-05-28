@@ -1,6 +1,5 @@
 package com.example.carouselexperimentone;
 
-import com.example.carouselexperimentone.carouselModel.CarouselTab;
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
@@ -37,9 +36,9 @@ public class Main extends Application {
         stage.show();
     }
 
-    public static void main(String[] args) throws IOException {
-        var tab = new CarouselTab("testTab", Paths.get("C:\\Users\\bubuf\\OneDrive - The Open University\\Documents\\DocumentCarousel\\Carousel1\\Tab1"));
-        System.out.println(tab.getFileList());
+    public static void main(String ... args) throws IOException {
+        var controller = new Controller(Paths.get("C:\\Users\\bubuf\\OneDrive - The Open University\\Documents\\DocumentCarousel\\Carousel1\\"));
+        System.out.println(controller.getTabs().get(0).getTabName());
         launch();
     }
 }

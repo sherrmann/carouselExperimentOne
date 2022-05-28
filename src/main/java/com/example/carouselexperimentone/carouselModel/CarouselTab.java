@@ -14,7 +14,8 @@ public class CarouselTab {
 
     public CarouselTab(String tabName, Path tabPath){
         this.tabName = tabName;
-        this.fileList = getFilesInTabFolder(tabPath);
+        this.tabPath = tabPath;
+        this.fileList = getFilesInTabFolder(this.tabPath);
     }
 
     private Set<Path> getFilesInTabFolder(Path dir){

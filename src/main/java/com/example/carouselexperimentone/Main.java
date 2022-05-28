@@ -37,8 +37,9 @@ public class Main extends Application {
     }
 
     public static void main(String ... args) throws IOException {
-        var controller = new Controller(Paths.get("C:\\Users\\bubuf\\OneDrive - The Open University\\Documents\\DocumentCarousel\\Carousel1\\"));
-        System.out.println(controller.getTabs().get(0).getTabName());
+        // create a controller and provide carousel path
+        Controller controller = new Controller(Paths.get("C:\\Users\\bubuf\\OneDrive - The Open University\\Documents\\DocumentCarousel\\Carousel1\\"));
+        System.out.println("ee");
         launch();
     }
 }

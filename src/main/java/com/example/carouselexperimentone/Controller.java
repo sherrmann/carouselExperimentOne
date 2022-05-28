@@ -18,10 +18,11 @@ public class Controller {
     }
 
     public List<CarouselTab> getCarouselTabs(){
+        // try with resources, list directories and collect List of tabs
         try(Stream<Path> stream = Files.walk(carouselPath,1)){
             return stream
                     .filter((Files::isDirectory))
-                    .filter(path -> (!path.equals(carouselPath)))
+                    .filter(path -> (!path.equals(carouselPath))) // remove first directory which equals carouselPath
                     .map(path -> new CarouselTab(path.getFileName().toString(), path))
                     .collect(Collectors.toList());
 

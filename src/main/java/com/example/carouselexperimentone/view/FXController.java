@@ -1,6 +1,7 @@
 package com.example.carouselexperimentone.view;
 
 import com.example.carouselexperimentone.Controller;
+import com.example.carouselexperimentone.carouselModel.CarouselTab;
 import javafx.event.Event;
 import javafx.fxml.FXML;
 import javafx.scene.control.Tab;
@@ -13,14 +14,12 @@ import javafx.scene.layout.VBox;
 import java.nio.file.Path;
 import java.util.List;
 import java.util.Map;
+import java.util.stream.Collectors;
 
-public class CarouselController {
+public class FXController {
+    // this variable introduces coupling!!!
     private Map<String, List<Path>> tabNameAndImagePaths;
-
-    public CarouselController() {
-        System.out.println("I was here!");;
-    }
-
+    private Controller controller;
     @FXML
     TabPane tabPane;
     @FXML
@@ -31,10 +30,9 @@ public class CarouselController {
     ImageView imageView;
 
     public void initialize() {
-        Controller controller = new Controller();
-        controller.getCarousel().getCarouselTabs().get(0).getTabPath();
-        var v = controller.getCarousel().getCarouselTabs().get(0).getFileList().get(0).toString();
-        Image image = new Image(controller.getCarousel().getCarouselTabs().get(0).getFileList().get(0).toString());
+        controller.getCarousel().getTabs().get(0).getTabPath();
+        var v = controller.getCarousel().getTabs().get(0).getFileList().get(0).toString();
+        Image image = new Image(controller.getCarousel().getTabs().get(0).getFileList().get(0).toString());
         imageView = new ImageView(image);
         imageView.setPreserveRatio(true);
         imageView.setSmooth(true);
@@ -55,4 +53,21 @@ public class CarouselController {
         imageView.setImage(image);
     }
 
+    public Map<String, List<Path>> getTabNameAndImagePaths() {
+        return tabNameAndImagePaths;
+    }
+
+    public FXController() {
+        controller = new Controller();
+        getTabNamesAndImagePaths();
+    }
+
+    private void getTabNamesAndImagePaths() {
+        tabNameAndImagePaths = controller.getCarousel().getTabs().stream()
+                .collect(Collectors.toMap(CarouselTab::getTabName,CarouselTab::getFileList));
+    }
+
+    public void setTabNameAndImagePaths(Map<String, List<Path>> tabNameAndImagePaths) {
+        this.tabNameAndImagePaths = tabNameAndImagePaths;
+    }
 }

@@ -12,11 +12,14 @@ public class Carousel {
 
     public Carousel(Path path){
         this.carouselPath = path;
-        this.tabs = getCarouselTabs();
+        this.tabs = getTabs();
     }
 
-    public List<CarouselTab> getCarouselTabs(){
-        // try with resources, list directories and collect List of tabs
+    public Path getCarouselPath() {
+        return this.carouselPath;
+    }
+
+    public List<CarouselTab> getTabs() {
         try(Stream<Path> stream = Files.walk(carouselPath,1)){
             return stream
                     .filter((Files::isDirectory))
@@ -28,14 +31,6 @@ public class Carousel {
             e.printStackTrace();
         }
         return null;
-    }
-
-    public Path getCarouselPath() {
-        return this.carouselPath;
-    }
-
-    public List<CarouselTab> getTabs() {
-        return tabs;
     }
 
     public void setTabs(List<CarouselTab> tabs) {

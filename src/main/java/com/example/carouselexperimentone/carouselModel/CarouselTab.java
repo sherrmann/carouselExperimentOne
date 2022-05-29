@@ -2,7 +2,7 @@ package com.example.carouselexperimentone.carouselModel;
 
 import java.nio.file.Files;
 import java.nio.file.Path;
-import java.util.Set;
+import java.util.List;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
@@ -10,7 +10,7 @@ public class CarouselTab {
     // variables
     private String tabName;
     private Path tabPath;
-    private Set<Path> fileList;
+    private List<Path> fileList;
 
     public CarouselTab(String tabName, Path tabPath){
         this.tabName = tabName;
@@ -18,12 +18,12 @@ public class CarouselTab {
         this.fileList = getFilesInTabFolder(this.tabPath);
     }
 
-    private Set<Path> getFilesInTabFolder(Path dir){
+    private List<Path> getFilesInTabFolder(Path dir){
         try (Stream<Path> stream = Files.walk(dir,1)){
             return stream
                     .filter(file -> !Files.isDirectory(file))
                     .map(Path::toAbsolutePath)
-                    .collect(Collectors.toSet());
+                    .collect(Collectors.toList());
         }
         catch (Exception e){
             e.printStackTrace();
@@ -47,7 +47,7 @@ public class CarouselTab {
         this.tabPath = tabPath;
     }
 
-    public Set<Path> getFileList() {
+    public List<Path> getFileList() {
         return fileList;
     }
 

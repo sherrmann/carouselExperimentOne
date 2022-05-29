@@ -7,7 +7,6 @@ import javafx.scene.Scene;
 import javafx.stage.Stage;
 
 import java.io.IOException;
-import java.nio.file.Paths;
 
 /* Thank you, thank you, thank you!!!
  https://stackoverflow.com/questions/48804283/javafx-imageview-fits-container
@@ -37,9 +36,6 @@ public class Main extends Application {
     }
 
     public static void main(String ... args) throws IOException {
-        // create a controller and provide carousel path
-        Controller controller = new Controller(Paths.get("C:\\Users\\bubuf\\OneDrive - The Open University\\Documents\\DocumentCarousel\\Carousel1\\"));
-        System.out.println("ee");
         launch();
     }
 }

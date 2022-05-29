@@ -1,47 +1,31 @@
 package com.example.carouselexperimentone;
 
-import com.example.carouselexperimentone.carouselModel.CarouselTab;
+import com.example.carouselexperimentone.carouselModel.Carousel;
 
-import java.nio.file.Files;
 import java.nio.file.Path;
-import java.util.List;
-import java.util.stream.Collectors;
-import java.util.stream.Stream;
+import java.nio.file.Paths;
 
 public class Controller {
-    private Path carouselPath;
-    private List<CarouselTab> tabs;
+    private Path path = Paths.get("C:\\Users\\bubuf\\OneDrive - The Open University\\Documents\\DocumentCarousel\\Carousel1\\");
+    private Carousel carousel;
 
-    public Controller(Path path){
-        this.carouselPath = path;
-        this.tabs = getCarouselTabs();
+    public Controller() {
+        carousel = new Carousel(path);
     }
 
-    public List<CarouselTab> getCarouselTabs(){
-        // try with resources, list directories and collect List of tabs
-        try(Stream<Path> stream = Files.walk(carouselPath,1)){
-            return stream
-                    .filter((Files::isDirectory))
-                    .filter(path -> (!path.equals(carouselPath))) // remove first directory which equals carouselPath
-                    .map(path -> new CarouselTab(path.getFileName().toString(), path))
-                    .collect(Collectors.toList());
-
-        }
-        catch (Exception e){
-            e.printStackTrace();
-        }
-        return null;
+    public Path getPath() {
+        return path;
     }
 
-    public Path getCarouselPath() {
-        return this.carouselPath;
+    public void setPath(Path path) {
+        this.path = path;
     }
 
-    public List<CarouselTab> getTabs() {
-        return tabs;
+    public Carousel getCarousel() {
+        return carousel;
     }
 
-    public void setTabs(List<CarouselTab> tabs) {
-        this.tabs = tabs;
+    public void setCarousel(Carousel carousel) {
+        this.carousel = carousel;
     }
 }

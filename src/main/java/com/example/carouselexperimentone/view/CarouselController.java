@@ -1,5 +1,6 @@
 package com.example.carouselexperimentone.view;
 
+import com.example.carouselexperimentone.Controller;
 import javafx.event.Event;
 import javafx.fxml.FXML;
 import javafx.geometry.Side;
@@ -21,8 +22,10 @@ public class CarouselController {
     ImageView imageView;
 
     public void initialize() {
-        // image
-        Image image = new Image("file:src/main/resources/com/example/carouselexperimentone/documents/CollectionsCheatSheet.png");
+        Controller controller = new Controller();
+        controller.getCarousel().getCarouselTabs().get(0).getTabPath();
+        var v = controller.getCarousel().getCarouselTabs().get(0).getFileList().get(0).toString();
+        Image image = new Image(controller.getCarousel().getCarouselTabs().get(0).getFileList().get(0).toString());
         imageView = new ImageView(image);
         imageView.setPreserveRatio(true);
         imageView.setSmooth(true);

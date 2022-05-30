@@ -45,9 +45,10 @@ public class Controller {
         imageViewPane = new ImageViewPane(imageView);
         VBox.setVgrow(imageViewPane, Priority.ALWAYS);
         defaultVBox.getChildren().add(0, imageViewPane);
-
+        tabPane.getTabs().addAll(createTabs());
     }
 
+    // creates a List of Tabs
     public List<Tab> createTabs(){
         List<String> tabs = carousel.getTabs().stream().map(CarouselTab::getTabName).toList();
         return carousel

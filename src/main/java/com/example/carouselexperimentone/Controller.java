@@ -9,7 +9,6 @@ import javafx.scene.control.Tab;
 import javafx.scene.control.TabPane;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
-import javafx.scene.layout.Priority;
 import javafx.scene.layout.VBox;
 
 import java.nio.file.Path;
@@ -30,20 +29,23 @@ public class Controller {
 
     public void initialize() {
         // TODO only for testing purposes
-        carousel.scanDirectoryForTabs().get(0).getTabPath();
-        carousel.scanDirectoryForTabs().get(0).getFileList().get(0).toString();
-        Image image = new Image(carousel.scanDirectoryForTabs().get(0).getFileList().get(0).toString());
-        imageView = new ImageView(image);
-        imageView.setPreserveRatio(true);
-        imageView.setSmooth(true);
+//        carousel.scanDirectoryForTabs().get(0).getTabPath();
+//        carousel.scanDirectoryForTabs().get(0).getFileList().get(0).toString();
+//        Image image = new Image(carousel.scanDirectoryForTabs().get(0).getFileList().get(0).toString());
+//        imageView = new ImageView(image);
+//        imageView.setPreserveRatio(true);
+//        imageView.setSmooth(true);
+//
+//        imageViewPane = new ImageViewPane(imageView);
+//        VBox.setVgrow(imageViewPane, Priority.ALWAYS);
+//        defaultVBox.getChildren().add(0, imageViewPane);
+//        tabPane.getTabs().addAll(createTabs());
+//        System.out.println(imageView.getImage().getUrl());
 
-        imageViewPane = new ImageViewPane(imageView);
-        VBox.setVgrow(imageViewPane, Priority.ALWAYS);
-        defaultVBox.getChildren().add(0, imageViewPane);
         tabPane.getTabs().addAll(createTabs());
-        System.out.println(imageView.getImage().getUrl());
-
     }
+
+
 
     // creates a List of Tabs
     public List<Tab> createTabs(){

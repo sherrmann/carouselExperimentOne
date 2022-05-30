@@ -41,7 +41,8 @@ public class Controller {
         VBox.setVgrow(imageViewPane, Priority.ALWAYS);
         defaultVBox.getChildren().add(0, imageViewPane);
         tabPane.getTabs().addAll(createTabs());
-        tabPane.getTabs().get(1).setContent(createImages().get(0));
+        System.out.println(imageView.getImage().getUrl());
+
     }
 
     // creates a List of Tabs
@@ -60,6 +61,7 @@ public class Controller {
                 .map(p -> new ImageView(p.toString()))
                 .toList();
     }
+
     public void setLeftButton(Event event) {
         Image image = new Image(getClass().getResource("java-cheatsheet.jpg").toString());
         imageView.setImage(image);

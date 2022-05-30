@@ -23,12 +23,13 @@ public class Controller {
     private Map<String, List<Path>> tabNameAndImagePaths;
     private Path path = Paths.get("C:\\Users\\bubuf\\OneDrive - The Open University\\Documents\\DocumentCarousel\\Carousel1\\");
     private Carousel carousel;
+    private List<Tab> listOfTabs;
     @FXML
-    TabPane tabPane;
+    VBox defaultVBox;
     @FXML
     Tab defaultTab;
     @FXML
-    VBox defaultVBox;
+    TabPane tabPane;
     ImageViewPane imageViewPane;
     ImageView imageView;
 
@@ -44,6 +45,17 @@ public class Controller {
         imageViewPane = new ImageViewPane(imageView);
         VBox.setVgrow(imageViewPane, Priority.ALWAYS);
         defaultVBox.getChildren().add(0, imageViewPane);
+
+    }
+
+    public List<Tab> createTabs(){
+        List<String> tabs = carousel.getTabs().stream().map(CarouselTab::getTabName).toList();
+        return carousel
+                .getTabs()
+                .stream()
+                .map(CarouselTab::getTabName)
+                .map(t -> new Tab(t))
+                .toList();
     }
 
     public void setLeftButton(Event event) {

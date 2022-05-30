@@ -37,4 +37,8 @@ public class Carousel {
     public void setTabs(List<CarouselTab> tabs) {
         this.tabs = tabs;
     }
+
+    public List<CarouselTab> getTabs() {
+        return tabs;
+    }
 }

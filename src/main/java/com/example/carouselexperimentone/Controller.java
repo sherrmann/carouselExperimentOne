@@ -1,31 +1,74 @@
 package com.example.carouselexperimentone;
 
 import com.example.carouselexperimentone.carouselModel.Carousel;
+import com.example.carouselexperimentone.carouselModel.CarouselTab;
+import com.example.carouselexperimentone.view.ImageViewPane;
+import javafx.event.Event;
+import javafx.fxml.FXML;
+import javafx.scene.control.Tab;
+import javafx.scene.control.TabPane;
+import javafx.scene.image.Image;
+import javafx.scene.image.ImageView;
+import javafx.scene.layout.Priority;
+import javafx.scene.layout.VBox;
 
 import java.nio.file.Path;
 import java.nio.file.Paths;
+import java.util.List;
+import java.util.Map;
+import java.util.stream.Collectors;
 
 public class Controller {
+    // this variable introduces coupling!!!
+    private Map<String, List<Path>> tabNameAndImagePaths;
     private Path path = Paths.get("C:\\Users\\bubuf\\OneDrive - The Open University\\Documents\\DocumentCarousel\\Carousel1\\");
     private Carousel carousel;
+    @FXML
+    TabPane tabPane;
+    @FXML
+    Tab defaultTab;
+    @FXML
+    VBox defaultVBox;
+    ImageViewPane imageViewPane;
+    ImageView imageView;
+
+    public void initialize() {
+        // TODO only for testing purposes
+        carousel.getTabs().get(0).getTabPath();
+        carousel.getTabs().get(0).getFileList().get(0).toString();
+        Image image = new Image(carousel.getTabs().get(0).getFileList().get(0).toString());
+        imageView = new ImageView(image);
+        imageView.setPreserveRatio(true);
+        imageView.setSmooth(true);
+
+        imageViewPane = new ImageViewPane(imageView);
+        VBox.setVgrow(imageViewPane, Priority.ALWAYS);
+        defaultVBox.getChildren().add(0, imageViewPane);
+
+
+    }
+
+    public void setLeftButton(Event event) {
+        Image image = new Image(getClass().getResource("java-cheatsheet.jpg").toString());
+        imageView.setImage(image);
+    }
+
+    public void setRightButton(Event event) {
+        Image image = new Image(getClass().getResource("intellij.png").toString());
+        imageView.setImage(image);
+    }
+
+    public Map<String, List<Path>> getTabNameAndImagePaths() {
+        return tabNameAndImagePaths;
+    }
 
     public Controller() {
-        carousel = new Carousel(path);
+        this.carousel = new Carousel(path);
+        getTabNamesAndImagePaths();
     }
 
-    public Path getPath() {
-        return path;
-    }
-
-    public void setPath(Path path) {
-        this.path = path;
-    }
-
-    public Carousel getCarousel() {
-        return carousel;
-    }
-
-    public void setCarousel(Carousel carousel) {
-        this.carousel = carousel;
+    private void getTabNamesAndImagePaths() {
+        tabNameAndImagePaths = this.carousel.getTabs().stream()
+                .collect(Collectors.toMap(CarouselTab::getTabName,CarouselTab::getFileList));
     }
 }

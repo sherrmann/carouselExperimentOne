@@ -12,14 +12,15 @@ public class Carousel {
 
     public Carousel(Path path){
         this.carouselPath = path;
-        this.tabs = getTabs();
+        this.tabs = scanDirectoryForTabs();
     }
 
     public Path getCarouselPath() {
         return this.carouselPath;
     }
 
-    public List<CarouselTab> getTabs() {
+    // Collect all tab folders from directory
+    public List<CarouselTab> scanDirectoryForTabs() {
         try(Stream<Path> stream = Files.walk(carouselPath,1)){
             return stream
                     .filter((Files::isDirectory))

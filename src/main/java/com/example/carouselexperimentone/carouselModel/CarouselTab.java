@@ -7,7 +7,6 @@ import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
 public class CarouselTab {
-    // variables
     private String tabName;
     private Path tabPath;
     private List<Path> fileList;
@@ -18,6 +17,7 @@ public class CarouselTab {
         this.fileList = getFilesInTabFolder(this.tabPath);
     }
 
+    // scan tab directory for images
     private List<Path> getFilesInTabFolder(Path dir){
         try (Stream<Path> stream = Files.walk(dir,1)){
             return stream

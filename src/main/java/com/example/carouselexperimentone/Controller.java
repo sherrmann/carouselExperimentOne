@@ -34,9 +34,9 @@ public class Controller {
 
     public void initialize() {
         // TODO only for testing purposes
-        carousel.getTabs().get(0).getTabPath();
-        carousel.getTabs().get(0).getFileList().get(0).toString();
-        Image image = new Image(carousel.getTabs().get(0).getFileList().get(0).toString());
+        carousel.scanDirectoryForTabs().get(0).getTabPath();
+        carousel.scanDirectoryForTabs().get(0).getFileList().get(0).toString();
+        Image image = new Image(carousel.scanDirectoryForTabs().get(0).getFileList().get(0).toString());
         imageView = new ImageView(image);
         imageView.setPreserveRatio(true);
         imageView.setSmooth(true);
@@ -44,8 +44,6 @@ public class Controller {
         imageViewPane = new ImageViewPane(imageView);
         VBox.setVgrow(imageViewPane, Priority.ALWAYS);
         defaultVBox.getChildren().add(0, imageViewPane);
-
-
     }
 
     public void setLeftButton(Event event) {
@@ -68,7 +66,7 @@ public class Controller {
     }
 
     private void getTabNamesAndImagePaths() {
-        tabNameAndImagePaths = this.carousel.getTabs().stream()
+        tabNameAndImagePaths = this.carousel.scanDirectoryForTabs().stream()
                 .collect(Collectors.toMap(CarouselTab::getTabName,CarouselTab::getFileList));
     }
 }

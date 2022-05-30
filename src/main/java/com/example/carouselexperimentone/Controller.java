@@ -15,15 +15,10 @@ import javafx.scene.layout.VBox;
 import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.util.List;
-import java.util.Map;
-import java.util.stream.Collectors;
 
 public class Controller {
-    // this variable introduces coupling!!!
-    private Map<String, List<Path>> tabNameAndImagePaths;
     private Path path = Paths.get("C:\\Users\\bubuf\\OneDrive - The Open University\\Documents\\DocumentCarousel\\Carousel1\\");
     private Carousel carousel;
-    private List<Tab> listOfTabs;
     @FXML
     VBox defaultVBox;
     @FXML
@@ -46,6 +41,7 @@ public class Controller {
         VBox.setVgrow(imageViewPane, Priority.ALWAYS);
         defaultVBox.getChildren().add(0, imageViewPane);
         tabPane.getTabs().addAll(createTabs());
+        tabPane.getTabs().get(1).setContent(createImages().get(0));
     }
 
     // creates a List of Tabs
@@ -59,6 +55,11 @@ public class Controller {
                 .toList();
     }
 
+    public List<ImageView> createImages(){
+        return carousel.getTabs().get(0).getFileList().stream()
+                .map(p -> new ImageView(p.toString()))
+                .toList();
+    }
     public void setLeftButton(Event event) {
         Image image = new Image(getClass().getResource("java-cheatsheet.jpg").toString());
         imageView.setImage(image);
@@ -69,17 +70,7 @@ public class Controller {
         imageView.setImage(image);
     }
 
-    public Map<String, List<Path>> getTabNameAndImagePaths() {
-        return tabNameAndImagePaths;
-    }
-
     public Controller() {
         this.carousel = new Carousel(path);
-        getTabNamesAndImagePaths();
-    }
-
-    private void getTabNamesAndImagePaths() {
-        tabNameAndImagePaths = this.carousel.scanDirectoryForTabs().stream()
-                .collect(Collectors.toMap(CarouselTab::getTabName,CarouselTab::getFileList));
     }
 }

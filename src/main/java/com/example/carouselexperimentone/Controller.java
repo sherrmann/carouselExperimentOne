@@ -67,7 +67,8 @@ public class Controller {
     private Tab createTabWithImageViewPane(CarouselTab carouselTab){
         var tab = new Tab(carouselTab.getTabName());
         var imageViewPane = new ImageViewPane(new ImageView());
-        ImageView imageView = new ImageView(carouselTab.getFileList().get(0).toString()); // TODO replace with default image
+        // create ImageView and set to image at index 0
+        ImageView imageView = new ImageView(carouselTab.getFileList().get(0).toString());
         imageView.setPreserveRatio(true);
         imageViews.add(imageView);
         imageViewPane.setImageView(imageView);

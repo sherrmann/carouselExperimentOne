@@ -5,19 +5,27 @@ import com.example.carouselexperimentone.carouselModel.CarouselTab;
 import com.example.carouselexperimentone.view.ImageViewPane;
 import javafx.event.Event;
 import javafx.fxml.FXML;
+import javafx.geometry.Insets;
 import javafx.scene.control.Tab;
 import javafx.scene.control.TabPane;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
+import javafx.scene.layout.Background;
+import javafx.scene.layout.BackgroundFill;
+import javafx.scene.layout.CornerRadii;
 import javafx.scene.layout.VBox;
+import javafx.scene.paint.Color;
 
 import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.util.List;
+import java.util.Map;
+import java.util.stream.Collectors;
 
 public class Controller {
     private Path path = Paths.get("C:\\Users\\bubuf\\OneDrive - The Open University\\Documents\\DocumentCarousel\\Carousel1\\");
-    private Carousel carousel;
+    public Carousel carousel;
+    private Map<Tab, List<Image>> tabs;
     @FXML
     VBox defaultVBox;
     @FXML
@@ -41,27 +49,45 @@ public class Controller {
 //        defaultVBox.getChildren().add(0, imageViewPane);
 //        tabPane.getTabs().addAll(createTabs());
 //        System.out.println(imageView.getImage().getUrl());
-
-        tabPane.getTabs().addAll(createTabs());
+        tabs = createTabs();
+        tabPane.getTabs().addAll(tabs.keySet());
+        ImageViewPane iV = (ImageViewPane) tabPane.getTabs().get(0).getContent();
+        iV.backgroundProperty().setValue(new Background(new BackgroundFill(Color.CRIMSON, CornerRadii.EMPTY, Insets.EMPTY)));
+        ImageViewPane iV2 = (ImageViewPane) tabPane.getTabs().get(1).getContent();
+        iV2.backgroundProperty().setValue(new Background(new BackgroundFill(Color.ORANGE, CornerRadii.EMPTY, Insets.EMPTY)));
     }
 
 
 
     // creates a List of Tabs
-    public List<Tab> createTabs(){
-        List<String> tabs = carousel.getTabs().stream().map(CarouselTab::getTabName).toList();
-        return carousel
-                .getTabs()
+//    public List<Tab> createTabs(){
+//        return carousel
+//                .getTabs()
+//                .stream()
+//                .map(CarouselTab::getTabName)
+//                .map(t -> new Tab(t))
+//                .map(t -> {
+//                    t.setContent(createImages().get(0));
+//                    return t;
+//                })
+//                .toList();
+//    }
+
+    private Map<Tab, List<Image>> createTabs(){
+        return carousel.getTabs()
                 .stream()
-                .map(CarouselTab::getTabName)
-                .map(t -> new Tab(t))
+                .collect(Collectors.toMap(t -> createTabWithImageViewPane(t), t -> createImages(t)));
+    }
+    private List<Image> createImages(CarouselTab t){
+        return t.getFileList().stream()
+                .map(p -> new Image(p.toString()))
                 .toList();
     }
-
-    public List<ImageView> createImages(){
-        return carousel.getTabs().get(0).getFileList().stream()
-                .map(p -> new ImageView(p.toString()))
-                .toList();
+    private Tab createTabWithImageViewPane(CarouselTab cTab){
+        var tab = new Tab(cTab.getTabName());
+        var iV = new ImageViewPane(new ImageView());
+        tab.setContent(iV);
+        return tab;
     }
 
     public void setLeftButton(Event event) {

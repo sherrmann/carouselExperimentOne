@@ -19,12 +19,14 @@ public class Carousel {
         return this.carouselPath;
     }
 
-    // Collect all tab folders from directory
+    // Collect folders from directory
     public List<CarouselTab> scanDirectoryForTabs() {
+        // try-with-resources: scan path for folders
         try(Stream<Path> stream = Files.walk(carouselPath,1)){
             return stream
                     .filter((Files::isDirectory))
                     .filter(path -> (!path.equals(carouselPath))) // remove first directory which equals carouselPath
+                    // create new CarouselTabs with name and abs path as argument
                     .map(path -> new CarouselTab(path.getFileName().toString(), path))
                     .collect(Collectors.toList());
         }

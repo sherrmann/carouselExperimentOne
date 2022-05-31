@@ -14,6 +14,7 @@ import javafx.scene.layout.VBox;
 
 import java.nio.file.Path;
 import java.nio.file.Paths;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 import java.util.stream.Collectors;
@@ -21,14 +22,13 @@ import java.util.stream.Collectors;
 public class Controller {
     private Path path = Paths.get("C:\\Users\\bubuf\\OneDrive - The Open University\\Documents\\DocumentCarousel\\Carousel1\\");
     public Carousel carousel;
-    private Map<Tab, List<Image>> tabs;
+    private Map<Tab, List<Image>> tabs; // list of Tabs and Lists of Images
+    private List<ImageView> imageViews; // list of imageViews
     @FXML
-    VBox defaultVBox;
-    @FXML
-    Tab defaultTab;
+    VBox defaultVBox; // top level VBox
     @FXML
     TabPane tabPane;
-    ImageView imageView;
+    ImageView imageView; // currently used in left/rightButton
 
     public void initialize() {
         // TODO only for testing purposes
@@ -46,10 +46,8 @@ public class Controller {
 //        System.out.println(imageView.getImage().getUrl());
         tabs = createTabs();
         tabPane.getTabs().addAll(tabs.keySet());
-
+        System.out.println(imageViews.getClass());
     }
-
-
 
     // creates a List of Tabs
 //    public List<Tab> createTabs(){
@@ -64,32 +62,33 @@ public class Controller {
 //                })
 //                .toList();
 //    }
-    private List<ImageView> getImageViewsFromTabPane(TabPane tP){
-        return tP.getTabs().parallelStream()
-                .map(t -> (ImageViewPane) t.getContent())
-                .map(i -> i.getImageView())
-                .toList();
+
+    // creates a tab containing an ImageViewPane containing an ImageView
+    private Tab createTabWithImageViewPane(CarouselTab carouselTab){
+        var tab = new Tab(carouselTab.getTabName());
+        var imageViewPane = new ImageViewPane(new ImageView());
+        ImageView imageView = new ImageView(carouselTab.getFileList().get(0).toString()); // TODO replace with default image
+        imageView.setPreserveRatio(true);
+        imageViews.add(imageView);
+        imageViewPane.setImageView(imageView);
+        tab.setContent(imageViewPane);
+        VBox.setVgrow(imageViewPane, Priority.ALWAYS);
+        return tab;
     }
+
+    // gets all CarouselTabs, returns tabs with ImageViewPane,ImageView
     private Map<Tab, List<Image>> createTabs(){
         return carousel.getTabs()
                 .stream()
                 .collect(Collectors.toMap(t -> createTabWithImageViewPane(t), t -> createImages(t)));
     }
+    // gets List<Path> from CarouselTab and returns List<Image>
     private List<Image> createImages(CarouselTab t){
         return t.getFileList().stream()
                 .map(p -> new Image(p.toString()))
                 .toList();
     }
-    private Tab createTabWithImageViewPane(CarouselTab cTab){
-        var tab = new Tab(cTab.getTabName());
-        var iV = new ImageViewPane(new ImageView());
-        ImageView img = new ImageView(cTab.getFileList().get(0).toString());
-        img.setPreserveRatio(true);
-        iV.setImageView(img);
-        tab.setContent(iV);
-        VBox.setVgrow(iV, Priority.ALWAYS);
-        return tab;
-    }
+
 
     public void setLeftButton(Event event) {
         Image image = new Image(getClass().getResource("java-cheatsheet.jpg").toString());
@@ -103,5 +102,6 @@ public class Controller {
 
     public Controller() {
         this.carousel = new Carousel(path);
+        imageViews = new ArrayList<>();
     }
 }

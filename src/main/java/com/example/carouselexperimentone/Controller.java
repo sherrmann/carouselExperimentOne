@@ -21,7 +21,7 @@ import java.util.stream.Collectors;
 
 public class Controller {
     private Path path = Paths.get("C:\\Users\\bubuf\\OneDrive - The Open University\\Documents\\DocumentCarousel\\Carousel1\\");
-    public Carousel carousel;
+    private Carousel carousel;
     private Map<Tab, List<Image>> tabs; // list of Tabs and Lists of Images
     private List<ImageView> imageViews; // list of imageViews
     @FXML
@@ -89,7 +89,6 @@ public class Controller {
                 .map(p -> new Image(p.toString()))
                 .toList();
     }
-
 
     public void setLeftButton(Event event) {
         Image image = new Image(getClass().getResource("java-cheatsheet.jpg").toString());

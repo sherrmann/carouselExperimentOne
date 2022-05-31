@@ -45,8 +45,7 @@ public class Controller {
 //        tabPane.getTabs().addAll(createTabs());
 //        System.out.println(imageView.getImage().getUrl());
         tabs = createTabs();
-        tabPane.getTabs().addAll(tabs.keySet());
-        System.out.println(imageViews.getClass());
+        tabPane.getTabs().addAll(tabs.keySet()); // add all tabs to tabPane
     }
 
     // creates a List of Tabs

@@ -90,8 +90,11 @@ public class Controller {
     }
 
     public void setLeftButton(Event event) {
-        Image image = new Image(getClass().getResource("java-cheatsheet.jpg").toString());
-        imageView.setImage(image);
+        Tab selectedTab = tabPane.getSelectionModel().getSelectedItem();
+        ImageViewPane currentImage = (ImageViewPane) selectedTab.getContent();
+        Image image = currentImage.getImageView().getImage();
+        List<Image> imageList = tabs.get(selectedTab);
+
     }
 
     public void setRightButton(Event event) {

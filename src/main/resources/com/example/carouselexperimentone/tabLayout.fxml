@@ -8,9 +8,7 @@
 <?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.VBox?>
 
-<VBox fx:id="defaultVBox" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity"
-      prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/18" xmlns:fx="http://javafx.com/fxml/1"
-      fx:controller="com.example.carouselexperimentone.Controller">
+<VBox fx:id="defaultVBox" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/18" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.carouselexperimentone.Controller">
     <TabPane fx:id="tabPane" prefHeight="396.0" prefWidth="600.0" side="LEFT" tabClosingPolicy="UNAVAILABLE" VBox.vgrow="ALWAYS">
         <VBox.margin>
             <Insets />
@@ -27,7 +25,7 @@
                 <Insets left="30.0" />
             </HBox.margin>
         </MenuButton>
-        <Button mnemonicParsing="false" text="Left" />
-        <Button mnemonicParsing="false" text="Right" />
+        <Button mnemonicParsing="false" onAction="#setLeftButton" text="Left" />
+        <Button mnemonicParsing="false" onAction="#setRightButton" text="Right" />
     </HBox>
 </VBox>

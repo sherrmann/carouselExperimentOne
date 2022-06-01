@@ -89,17 +89,38 @@ public class Controller {
                 .toList();
     }
 
-    public void setLeftButton(Event event) {
-        Tab selectedTab = tabPane.getSelectionModel().getSelectedItem();
-        ImageViewPane currentImage = (ImageViewPane) selectedTab.getContent();
-        Image image = currentImage.getImageView().getImage();
-        List<Image> imageList = tabs.get(selectedTab);
+    // get CarouselTab from selected Tab by comparing Names
+    private CarouselTab getCarouselTabFromSelectedTab(){
+        return carousel.getTabs().stream()
+                .filter(t -> t.getTabName().equals(tabPane.getSelectionModel().getSelectedItem().getText()))
+                .findFirst()
+                .get();
+    }
 
+    // get ImageView from selected Tab
+    private ImageView getImageViewFromSelectedTab(){
+        ImageViewPane iVP =  (ImageViewPane) tabPane.getSelectionModel().getSelectedItem().getContent();
+        return iVP.getImageView();
+    }
+
+    public void setLeftButton(Event event) {
+        int i = getCarouselTabFromSelectedTab().getFileList().stream()
+                .map(Path::toString)
+                .toList()
+                .indexOf(getImageViewFromSelectedTab().getImage().getUrl());
+
+        getImageViewFromSelectedTab().setImage(
+                new Image(getCarouselTabFromSelectedTab().getFileList().get(--i).toString()));
     }
 
     public void setRightButton(Event event) {
-        Image image = new Image(getClass().getResource("intellij.png").toString());
-        imageView.setImage(image);
+        // get the current index
+        int i = getCarouselTabFromSelectedTab().getFileList().stream()
+                .map(Path::toString)
+                .toList()
+                .indexOf(getImageViewFromSelectedTab().getImage().getUrl());
+
+        getImageViewFromSelectedTab().setImage(new Image(getCarouselTabFromSelectedTab().getFileList().get(++i).toString()));
     }
 
     public Controller() {

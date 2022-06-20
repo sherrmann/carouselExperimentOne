@@ -10,22 +10,4 @@
             <Insets />
         </VBox.margin>
     </TabPane>
-    <HBox spacing="10.0" VBox.vgrow="NEVER">
-        <MenuButton mnemonicParsing="false" text="Menu">
-            <items>
-                <MenuItem mnemonicParsing="false" text="add document" />
-                <MenuItem mnemonicParsing="false" text="remove document" />
-                <MenuItem mnemonicParsing="false" text="change document" />
-            </items>
-            <HBox.margin>
-                <Insets left="30.0" />
-            </HBox.margin>
-        </MenuButton>
-        <Button mnemonicParsing="false" onAction="#setLeftButton" text="Left" />
-        <Button mnemonicParsing="false" onAction="#setRightButton" text="Right" />
-      <Label fx:id="indexLabel" text="index: " />
-      <VBox.margin>
-         <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
-      </VBox.margin>
-    </HBox>
 </VBox>

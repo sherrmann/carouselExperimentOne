@@ -5,10 +5,7 @@ import com.example.carouselexperimentone.carouselModel.CarouselTab;
 import com.example.carouselexperimentone.view.ImageViewPane;
 import javafx.event.Event;
 import javafx.fxml.FXML;
-import javafx.scene.control.Button;
-import javafx.scene.control.Label;
-import javafx.scene.control.Tab;
-import javafx.scene.control.TabPane;
+import javafx.scene.control.*;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.HBox;
@@ -45,11 +42,15 @@ public class Controller {
         imageView.setPreserveRatio(true);
         imageView.setSmooth(true);
         var imageViewPane = new ImageViewPane(imageView);
-        VBox vBox = new VBox(imageViewPane,new HBox(new Button("Test")));
+        VBox vBox = new VBox(imageViewPane, createTabMenu());
         tab.setContent(vBox);
         VBox.setVgrow(imageViewPane, Priority.ALWAYS);
         return tab;
     }
+
+    private HBox createTabMenu(){
+        return new HBox(new MenuButton("Menu"), new Button("Left"), new Button("Right"));
+        }
 
     // gets all CarouselTabs, returns tabs with ImageViewPane,ImageView
     private Map<Tab, List<Image>> createTabs(){

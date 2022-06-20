@@ -1,22 +1,26 @@
 package com.example.carouselexperimentone.carouselModel;
 
+import lombok.Data;
+import lombok.NonNull;
+
 import java.nio.file.Files;
 import java.nio.file.Path;
+import java.util.ArrayList;
+import java.util.Comparator;
 import java.util.List;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
+@Data
 public class Carousel {
     private List<CarouselTab> tabs;
+    @NonNull
     private Path carouselPath;
 
     public Carousel(Path path){
         this.carouselPath = path;
         this.tabs = scanDirectoryForTabs();
-    }
-
-    public Path getCarouselPath() {
-        return this.carouselPath;
+        tabs.sort(Comparator.comparing(CarouselTab::getTabName));
     }
 
     // Collect folders from directory
@@ -28,19 +32,11 @@ public class Carousel {
                     .filter(path -> (!path.equals(carouselPath))) // remove first directory which equals carouselPath
                     // create new CarouselTabs with name and abs path as argument
                     .map(path -> new CarouselTab(path.getFileName().toString(), path))
-                    .collect(Collectors.toList());
+                    .collect(Collectors.toCollection(ArrayList::new));
         }
         catch (Exception e){
             e.printStackTrace();
         }
         return null;
-    }
-
-    public void setTabs(List<CarouselTab> tabs) {
-        this.tabs = tabs;
-    }
-
-    public List<CarouselTab> getTabs() {
-        return tabs;
     }
 }

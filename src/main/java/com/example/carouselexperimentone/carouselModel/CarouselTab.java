@@ -2,11 +2,12 @@ package com.example.carouselexperimentone.carouselModel;
 
 import java.nio.file.Files;
 import java.nio.file.Path;
+import java.util.Collections;
 import java.util.List;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
-public class CarouselTab {
+public class CarouselTab{
     private String tabName;
     private Path tabPath;
     private List<Path> fileList;
@@ -15,6 +16,7 @@ public class CarouselTab {
         this.tabName = tabName;
         this.tabPath = tabPath;
         this.fileList = getFilesInTabFolder(this.tabPath);
+        Collections.sort(fileList);
     }
 
     // scan tab directory for images

@@ -5,6 +5,7 @@ import com.example.carouselexperimentone.carouselModel.CarouselTab;
 import com.example.carouselexperimentone.view.ImageViewPane;
 import javafx.event.Event;
 import javafx.fxml.FXML;
+import javafx.scene.control.Label;
 import javafx.scene.control.Tab;
 import javafx.scene.control.TabPane;
 import javafx.scene.image.Image;
@@ -26,6 +27,8 @@ public class Controller {
     VBox defaultVBox; // top level VBox
     @FXML
     TabPane tabPane;
+    @FXML
+    Label indexLabel;
 
     public void initialize() {
         tabs = createTabs();
@@ -35,12 +38,11 @@ public class Controller {
     // creates a tab containing an ImageViewPane containing an ImageView
     private Tab createTabWithImageViewPane(CarouselTab carouselTab){
         var tab = new Tab(carouselTab.getTabName());
-        var imageViewPane = new ImageViewPane(new ImageView());
         // create ImageView and set to image at index 0
         ImageView imageView = new ImageView(carouselTab.getFileList().get(0).toString());
         imageView.setPreserveRatio(true);
         imageView.setSmooth(true);
-        imageViewPane.setImageView(imageView);
+        var imageViewPane = new ImageViewPane(imageView);
         tab.setContent(imageViewPane);
         VBox.setVgrow(imageViewPane, Priority.ALWAYS);
         return tab;

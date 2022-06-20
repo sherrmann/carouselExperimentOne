@@ -14,6 +14,7 @@ import javafx.scene.layout.VBox;
 
 import java.nio.file.Path;
 import java.nio.file.Paths;
+import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.stream.Collectors;
@@ -50,7 +51,7 @@ public class Controller {
     private Map<Tab, List<Image>> createTabs(){
         return carousel.getTabs()
                 .stream()
-                .collect(Collectors.toMap(this::createTabWithImageViewPane, this::createImages));
+                .collect(Collectors.toMap(this::createTabWithImageViewPane, this::createImages, (u,v) -> u, LinkedHashMap::new));
     }
     // gets List<Path> from CarouselTab and returns List<Image>
     private List<Image> createImages(CarouselTab t){

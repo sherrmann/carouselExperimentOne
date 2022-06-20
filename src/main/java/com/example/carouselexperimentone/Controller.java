@@ -5,11 +5,13 @@ import com.example.carouselexperimentone.carouselModel.CarouselTab;
 import com.example.carouselexperimentone.view.ImageViewPane;
 import javafx.event.Event;
 import javafx.fxml.FXML;
+import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.Tab;
 import javafx.scene.control.TabPane;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
+import javafx.scene.layout.HBox;
 import javafx.scene.layout.Priority;
 import javafx.scene.layout.VBox;
 
@@ -43,7 +45,8 @@ public class Controller {
         imageView.setPreserveRatio(true);
         imageView.setSmooth(true);
         var imageViewPane = new ImageViewPane(imageView);
-        tab.setContent(imageViewPane);
+        VBox vBox = new VBox(imageViewPane,new HBox(new Button("Test")));
+        tab.setContent(vBox);
         VBox.setVgrow(imageViewPane, Priority.ALWAYS);
         return tab;
     }

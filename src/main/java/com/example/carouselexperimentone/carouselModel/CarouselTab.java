@@ -1,5 +1,8 @@
 package com.example.carouselexperimentone.carouselModel;
 
+import lombok.Data;
+import lombok.NonNull;
+
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.util.Collections;
@@ -7,9 +10,13 @@ import java.util.List;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
+@Data
 public class CarouselTab{
+    @NonNull
     private String tabName;
+    @NonNull
     private Path tabPath;
+    @NonNull
     private List<Path> fileList;
 
     public CarouselTab (String tabName, Path tabPath){
@@ -31,29 +38,5 @@ public class CarouselTab{
             e.printStackTrace();
         }
         return null;
-    }
-
-    public String getTabName() {
-        return tabName;
-    }
-
-    public void setTabName(String tabName) {
-        this.tabName = tabName;
-    }
-
-    public Path getTabPath() {
-        return tabPath;
-    }
-
-    public void setTabPath(Path tabPath) {
-        this.tabPath = tabPath;
-    }
-
-    public List<Path> getFileList() {
-        return fileList;
-    }
-
-    public void setFileList() {
-        this.getFilesInTabFolder(tabPath);
     }
 }

@@ -26,7 +26,6 @@ public class Controller {
     VBox defaultVBox; // top level VBox
     @FXML
     TabPane tabPane;
-    ImageView imageView; // currently used in left/rightButton
 
     public void initialize() {
         tabs = createTabs();

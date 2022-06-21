@@ -3,7 +3,6 @@ package com.example.carouselexperimentone;
 import com.example.carouselexperimentone.carouselModel.Carousel;
 import com.example.carouselexperimentone.carouselModel.CarouselTab;
 import com.example.carouselexperimentone.view.ImageViewPane;
-import javafx.event.Event;
 import javafx.fxml.FXML;
 import javafx.scene.control.*;
 import javafx.scene.image.Image;
@@ -14,6 +13,7 @@ import javafx.scene.layout.VBox;
 
 import java.nio.file.Path;
 import java.nio.file.Paths;
+import java.util.ArrayList;
 import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
@@ -30,7 +30,10 @@ public class Controller {
     public void initialize() {
         tabs = createTabs();
         tabPane.getTabs().addAll(tabs.keySet()); // add all tabs to tabPane
+        // tests
         System.out.println(getImageViewFromSelectedTab().toString());
+        System.out.println(getCarouselTabFromSelectedTab().toString());
+        System.out.println(updateMenuLabel());
     }
     private Tab createTabWithImageViewPane(CarouselTab carouselTab){
         var tab = new Tab(carouselTab.getTabName());
@@ -71,27 +74,38 @@ public class Controller {
         ImageViewPane iVP =  (ImageViewPane) vBox.getChildren().get(0);
         return iVP.getImageView();
     }
-    public void setLeftButton(Event event) {
-        int i = getCarouselTabFromSelectedTab().getFileList().stream()
-                .map(Path::toString)
-                .toList()
-                .indexOf(getImageViewFromSelectedTab().getImage().getUrl());
+    private Tab getSelectedTab(){ return tabPane.getSelectionModel().getSelectedItem(); }
+    private int updateMenuLabel(){
+        var l = getSelectedTab().getContent();
 
-        getImageViewFromSelectedTab().setImage(
-                new Image(getCarouselTabFromSelectedTab().getFileList().get(--i).toString()));
-    }
-    public void setRightButton(Event event) {
-        // get the current index
-        int i = getCarouselTabFromSelectedTab().getFileList().stream()
+        return getCarouselTabFromSelectedTab()
+                .getFileList()
+                .stream()
                 .map(Path::toString)
-                .toList()
-                .indexOf(getImageViewFromSelectedTab().getImage().getUrl());
-
-        getImageViewFromSelectedTab().setImage(new Image(getCarouselTabFromSelectedTab().getFileList().get(++i).toString()));
+                .collect(Collectors.toCollection(ArrayList::new))
+                .indexOf(getImageViewFromSelectedTab().getImage().getUrl().toString());
     }
+//    public void setLeftButton(Event event) {
+//        int i = getCarouselTabFromSelectedTab().getFileList().stream()
+//                .map(Path::toString)
+//                .toList()
+//                .indexOf(getImageViewFromSelectedTab().getImage().getUrl());
+//
+//        getImageViewFromSelectedTab().setImage(
+//                new Image(getCarouselTabFromSelectedTab().getFileList().get(--i).toString()));
+//    }
+//    public void setRightButton(Event event) {
+//        // get the current index
+//        int i = getCarouselTabFromSelectedTab().getFileList().stream()
+//                .map(Path::toString)
+//                .toList()
+//                .indexOf(getImageViewFromSelectedTab().getImage().getUrl());
+//
+//        getImageViewFromSelectedTab().setImage(new Image(getCarouselTabFromSelectedTab().getFileList().get(++i).toString()));
+
+    //    }
     public Controller() {
         Path path = Paths.get("C:\\Users\\bubuf\\OneDrive - The Open University\\Documents\\DocumentCarousel\\Carousel1\\");
         this.carousel = new Carousel(path);
     }
-    private Tab getSelectedTab(){ return tabPane.getSelectionModel().getSelectedItem(); }
 }

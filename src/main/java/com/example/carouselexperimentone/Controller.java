@@ -30,9 +30,8 @@ public class Controller {
     public void initialize() {
         tabs = createTabs();
         tabPane.getTabs().addAll(tabs.keySet()); // add all tabs to tabPane
+        System.out.println(getImageViewFromSelectedTab().toString());
     }
-
-    // creates a tab containing an ImageViewPane containing an ImageView
     private Tab createTabWithImageViewPane(CarouselTab carouselTab){
         var tab = new Tab(carouselTab.getTabName());
         // create ImageView and set to image at index 0
@@ -45,41 +44,33 @@ public class Controller {
         VBox.setVgrow(imageViewPane, Priority.ALWAYS);
         return tab;
     }
-
     private HBox createTabMenu(){
         var hBox =  new HBox(new MenuButton("Menu"), new Button("Left"), new Button("Right"),
                 new Label("test"));
         hBox.setSpacing(10.0);
         return hBox;
         }
-
-    // gets all CarouselTabs, returns tabs with ImageViewPane,ImageView
     private Map<Tab, List<Image>> createTabs(){
         return carousel.getTabs()
                 .stream()
                 .collect(Collectors.toMap(this::createTabWithImageViewPane, this::createImages, (u,v) -> u, LinkedHashMap::new));
     }
-    // gets List<Path> from CarouselTab and returns List<Image>
     private List<Image> createImages(CarouselTab t){
         return t.getFileList().stream()
                 .map(p -> new Image(p.toString()))
                 .toList();
     }
-
-    // get CarouselTab from selected Tab by comparing Names
     private CarouselTab getCarouselTabFromSelectedTab(){
         return carousel.getTabs().stream()
                 .filter(t -> t.getTabName().equals(tabPane.getSelectionModel().getSelectedItem().getText()))
                 .findFirst()
                 .get();
     }
-
-    // get ImageView from selected Tab
     private ImageView getImageViewFromSelectedTab(){
-        ImageViewPane iVP =  (ImageViewPane) tabPane.getSelectionModel().getSelectedItem().getContent();
+        VBox vBox =  (VBox) tabPane.getSelectionModel().getSelectedItem().getContent();
+        ImageViewPane iVP =  (ImageViewPane) vBox.getChildren().get(0);
         return iVP.getImageView();
     }
-
     public void setLeftButton(Event event) {
         int i = getCarouselTabFromSelectedTab().getFileList().stream()
                 .map(Path::toString)
@@ -89,7 +80,6 @@ public class Controller {
         getImageViewFromSelectedTab().setImage(
                 new Image(getCarouselTabFromSelectedTab().getFileList().get(--i).toString()));
     }
-
     public void setRightButton(Event event) {
         // get the current index
         int i = getCarouselTabFromSelectedTab().getFileList().stream()
@@ -99,9 +89,9 @@ public class Controller {
 
         getImageViewFromSelectedTab().setImage(new Image(getCarouselTabFromSelectedTab().getFileList().get(++i).toString()));
     }
-
     public Controller() {
         Path path = Paths.get("C:\\Users\\bubuf\\OneDrive - The Open University\\Documents\\DocumentCarousel\\Carousel1\\");
         this.carousel = new Carousel(path);
     }
+    private Tab getSelectedTab(){ return tabPane.getSelectionModel().getSelectedItem(); }
 }

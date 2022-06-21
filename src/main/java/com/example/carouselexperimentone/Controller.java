@@ -26,8 +26,6 @@ public class Controller {
     VBox defaultVBox; // top level VBox
     @FXML
     TabPane tabPane;
-    @FXML
-    Label indexLabel;
 
     public void initialize() {
         tabs = createTabs();
@@ -49,7 +47,10 @@ public class Controller {
     }
 
     private HBox createTabMenu(){
-        return new HBox(new MenuButton("Menu"), new Button("Left"), new Button("Right"));
+        var hBox =  new HBox(new MenuButton("Menu"), new Button("Left"), new Button("Right"),
+                new Label("test"));
+        hBox.setSpacing(10.0);
+        return hBox;
         }
 
     // gets all CarouselTabs, returns tabs with ImageViewPane,ImageView

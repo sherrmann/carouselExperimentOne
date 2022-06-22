@@ -5,7 +5,6 @@
 <?import javafx.scene.layout.*?>
 
 <VBox fx:id="tabRootVBox" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/16" xmlns:fx="http://javafx.com/fxml/1">
-
     <HBox spacing="5.0" VBox.vgrow="NEVER">
         <MenuButton mnemonicParsing="false" text="Menu">
             <items>

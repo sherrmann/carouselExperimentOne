@@ -5,6 +5,7 @@ import lombok.NonNull;
 
 import java.nio.file.Files;
 import java.nio.file.Path;
+import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 import java.util.stream.Collectors;
@@ -32,7 +33,7 @@ public class CarouselTab{
             return stream
                     .filter(file -> !Files.isDirectory(file))
                     .map(Path::toAbsolutePath)
-                    .collect(Collectors.toList());
+                    .collect(Collectors.toCollection(ArrayList::new));
         }
         catch (Exception e){
             e.printStackTrace();

@@ -15,5 +15,6 @@ module com.example.carouselexperimentone {
     opens com.example.carouselexperimentone to javafx.fxml;
     exports com.example.carouselexperimentone;
     exports com.example.carouselexperimentone.view;
+    exports com.example.carouselexperimentone.carouselModel;
     opens com.example.carouselexperimentone.view to javafx.fxml;
 }

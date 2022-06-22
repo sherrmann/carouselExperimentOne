@@ -6,7 +6,6 @@ import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.control.Tab;
 import javafx.scene.control.TabPane;
-import javafx.scene.layout.Priority;
 import javafx.scene.layout.VBox;
 
 import java.nio.file.Path;
@@ -27,11 +26,10 @@ public class Controller {
         tabs = createTabs(carousel);
         tabPane.getTabs().addAll(tabs);
     }
-    // Generates a Tab with a VBox, loads FXML, adds a TabController
+    // Generates a Tab with a VBox, loads FXML, adds a TabController with carouselTab reference
     private Tab generateTab(CarouselTab carouselTab){
         var tab = new Tab(carouselTab.getTabName());
         VBox vBox = new VBox();
-        VBox.setVgrow(vBox, Priority.ALWAYS);
         try {
             var loader = new FXMLLoader(getClass().getResource("/com/example/carouselexperimentone/tab.fxml"));
             loader.setController(new TabController(carouselTab));

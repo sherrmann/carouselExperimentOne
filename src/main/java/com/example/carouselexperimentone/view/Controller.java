@@ -39,8 +39,12 @@ public class Controller {
         imageView.setSmooth(true);
         var imageViewPane = new ImageViewPane(imageView);
         VBox vBox = new VBox();
+        TabController tabController;
         try {
-            vBox = FXMLLoader.load(getClass().getResource("/com/example/carouselexperimentone/tab.fxml"));
+            var loader = new FXMLLoader(getClass().getResource("/com/example/carouselexperimentone/tab.fxml"));
+            vBox = loader.load();
+            tabController = loader.getController();
+            tabController.setCarouselTab(carouselTab);
         } catch (Exception e) {
             e.printStackTrace();
         }

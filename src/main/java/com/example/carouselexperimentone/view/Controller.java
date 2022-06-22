@@ -23,11 +23,11 @@ public class Controller {
     TabPane tabPane;
 
     public void initialize() {
-        tabs = createTabs(carousel);
+        tabs = createListOfTabs(carousel);
         tabPane.getTabs().addAll(tabs);
     }
     // Generates a Tab with a VBox, loads FXML, adds a TabController with carouselTab reference
-    private Tab generateTab(CarouselTab carouselTab){
+    private Tab createTab(CarouselTab carouselTab){
         var tab = new Tab(carouselTab.getTabName());
         VBox vBox = new VBox();
         try {
@@ -41,10 +41,10 @@ public class Controller {
         return tab;
     }
 
-    private List<Tab> createTabs(Carousel carousel){
+    private List<Tab> createListOfTabs(Carousel carousel){
         return carousel.getTabs()
                 .stream()
-                .map(this::generateTab)
+                .map(this::createTab)
                 .collect(Collectors.toCollection(ArrayList::new));
     }
 

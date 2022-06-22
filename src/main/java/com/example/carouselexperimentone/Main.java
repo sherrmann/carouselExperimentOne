@@ -32,6 +32,7 @@ public class Main extends Application {
         Parent parent = FXMLLoader.load(getClass().getResource("mainWindow.fxml"));
         Scene scene = new Scene(parent);
         stage.setScene(scene);
+        stage.setTitle("Document Carousel Prototype");
         stage.show();
     }
 

@@ -41,9 +41,8 @@ public class Controller {
         TabController tabController;
         try {
             var loader = new FXMLLoader(getClass().getResource("/com/example/carouselexperimentone/tab.fxml"));
+            loader.setController(new TabController(carouselTab));
             vBox = loader.load();
-            tabController = loader.getController();
-            tabController.setCarouselTab(carouselTab);
         } catch (Exception e) {
             e.printStackTrace();
         }

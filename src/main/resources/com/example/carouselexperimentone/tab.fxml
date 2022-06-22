@@ -3,20 +3,17 @@
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
 
-<VBox fx:id="tabRootVBox" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/16" xmlns:fx="http://javafx.com/fxml/1">
-   <children>
-      <HBox VBox.vgrow="NEVER">
-         <children>
-            <MenuButton mnemonicParsing="false" text="MenuButton">
-              <items>
-                <MenuItem mnemonicParsing="false" text="Action 1" />
-                <MenuItem mnemonicParsing="false" text="Action 2" />
-              </items>
-            </MenuButton>
-            <Button fx:id="leftButton" mnemonicParsing="false" onAction="#leftButton" text="&lt;--" />
-            <Button fx:id="rightButton" mnemonicParsing="false" onAction="#rightButton" text="--&gt;" />
-         </children>
-      </HBox>
-   </children>
+<VBox fx:id="tabRootVBox" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/16"
+      xmlns:fx="http://javafx.com/fxml/1">
 
+    <HBox VBox.vgrow="NEVER">
+        <MenuButton mnemonicParsing="false" text="MenuButton">
+            <items>
+                <MenuItem mnemonicParsing="false" text="Action 1"/>
+                <MenuItem mnemonicParsing="false" text="Action 2"/>
+            </items>
+        </MenuButton>
+        <Button fx:id="leftButton" mnemonicParsing="false" onAction="#leftButton" text="&lt;--"/>
+        <Button fx:id="rightButton" mnemonicParsing="false" onAction="#rightButton" text="--&gt;"/>
+    </HBox>
 </VBox>

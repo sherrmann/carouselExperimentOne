@@ -40,41 +40,4 @@ public class CarouselTab{
         }
         return null;
     }
-
-//    private List<Image> createImages(CarouselTab t){
-//        return t.getFileList().stream()
-//                .map(p -> new Image(p.toString()))
-//                .toList();
-//    }
-//    private CarouselTab getCarouselTabFromSelectedTab(){
-//        return carousel.getTabs().stream()
-//                .filter(t -> t.getTabName().equals(tabPane.getSelectionModel().getSelectedItem().getText()))
-//                .findFirst()
-//                .get();
-//    }
-//    private ImageView getImageViewFromSelectedTab(){
-//        VBox vBox =  (VBox) tabPane.getSelectionModel().getSelectedItem().getContent();
-//        ImageViewPane iVP =  (ImageViewPane) vBox.getChildren().get(0);
-//        return iVP.getImageView();
-//    }
-//    private Tab getSelectedTab(){ return tabPane.getSelectionModel().getSelectedItem(); }
-//    public void setLeftButton(Event event) {
-//        int i = getCarouselTabFromSelectedTab().getFileList().stream()
-//                .map(Path::toString)
-//                .toList()
-//                .indexOf(getImageViewFromSelectedTab().getImage().getUrl());
-//
-//        getImageViewFromSelectedTab().setImage(
-//                new Image(getCarouselTabFromSelectedTab().getFileList().get(--i).toString()));
-//    }
-//    public void setRightButton(Event event) {
-//        // get the current index
-//        int i = getCarouselTabFromSelectedTab().getFileList().stream()
-//                .map(Path::toString)
-//                .toList()
-//                .indexOf(getImageViewFromSelectedTab().getImage().getUrl());
-//
-//        getImageViewFromSelectedTab().setImage(new Image(getCarouselTabFromSelectedTab().getFileList().get(++i).toString()));
-
-    //    }
 }

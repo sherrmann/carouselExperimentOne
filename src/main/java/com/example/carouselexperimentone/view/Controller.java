@@ -1,9 +1,9 @@
-package com.example.carouselexperimentone;
+package com.example.carouselexperimentone.view;
 
 import com.example.carouselexperimentone.carouselModel.Carousel;
 import com.example.carouselexperimentone.carouselModel.CarouselTab;
-import com.example.carouselexperimentone.view.ImageViewPane;
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
 import javafx.scene.control.*;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
@@ -11,6 +11,7 @@ import javafx.scene.layout.HBox;
 import javafx.scene.layout.Priority;
 import javafx.scene.layout.VBox;
 
+import java.net.URL;
 import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.util.ArrayList;
@@ -28,13 +29,20 @@ public class Controller {
     TabPane tabPane;
 
     public void initialize() {
-        tabs = createTabs();
-        tabPane.getTabs().addAll(tabs.keySet()); // add all tabs to tabPane
-        // tests
-        System.out.println(getImageViewFromSelectedTab().toString());
-        System.out.println(getCarouselTabFromSelectedTab().toString());
-        System.out.println(updateMenuLabel());
+//        tabPane.getTabs().addAll(createFXMLTab()); // add all tabs to tabPane
+        try {
+            URL fxmlLocation = getClass().getResource("/com/example/carouselexperimentone/tab.fxml");
+            var fxmlLoader = new FXMLLoader(fxmlLocation);
+            VBox vBox = fxmlLoader.load();
+            Tab tab = new Tab("test");
+            tab.setContent(vBox);
+            tabPane.getTabs().add(tab);
+
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
     }
+
     private Tab createTabWithImageViewPane(CarouselTab carouselTab){
         var tab = new Tab(carouselTab.getTabName());
         // create ImageView and set to image at index 0

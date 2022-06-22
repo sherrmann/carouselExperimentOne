@@ -29,7 +29,7 @@ import java.io.IOException;
 public class Main extends Application {
     @Override
     public void start(Stage stage) throws IOException {
-        Parent parent = FXMLLoader.load(getClass().getResource("tabLayout.fxml"));
+        Parent parent = FXMLLoader.load(getClass().getResource("mainWindow.fxml"));
         Scene scene = new Scene(parent);
         stage.setScene(scene);
         stage.show();

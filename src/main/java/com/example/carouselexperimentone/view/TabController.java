@@ -6,6 +6,8 @@ import javafx.scene.image.ImageView;
 import javafx.scene.layout.Priority;
 import javafx.scene.layout.VBox;
 
+import java.nio.file.Path;
+
 public class TabController {
     public CarouselTab carouselTab;
     @FXML
@@ -16,15 +18,20 @@ public class TabController {
 
     public void initialize(){
         tabRootVBox.getChildren().add(0, makeImageViewPane());
+        System.out.println(getCurrentImageIndex());
     }
 
     private ImageViewPane makeImageViewPane(){
-        ImageView imageView = new ImageView(carouselTab.getFileList().get(0).toString());
+        imageView = new ImageView(carouselTab.getFileList().get(0).toString());
         imageView.setPreserveRatio(true);
         imageView.setSmooth(true);
         ImageViewPane iVP =  new ImageViewPane(imageView);
         VBox.setVgrow(iVP, Priority.ALWAYS);
         return iVP;
+    }
+
+    private int getCurrentImageIndex(){
+        return carouselTab.getFileList().indexOf(Path.of(imageView.getImage().getUrl().toString()));
     }
 
 }

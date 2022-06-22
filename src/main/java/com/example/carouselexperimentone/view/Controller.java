@@ -11,10 +11,8 @@ import javafx.scene.layout.HBox;
 import javafx.scene.layout.Priority;
 import javafx.scene.layout.VBox;
 
-import java.net.URL;
 import java.nio.file.Path;
 import java.nio.file.Paths;
-import java.util.ArrayList;
 import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
@@ -29,18 +27,8 @@ public class Controller {
     TabPane tabPane;
 
     public void initialize() {
-//        tabPane.getTabs().addAll(createFXMLTab()); // add all tabs to tabPane
-        try {
-            URL fxmlLocation = getClass().getResource("/com/example/carouselexperimentone/tab.fxml");
-            var fxmlLoader = new FXMLLoader(fxmlLocation);
-            VBox vBox = fxmlLoader.load();
-            Tab tab = new Tab("test");
-            tab.setContent(vBox);
-            tabPane.getTabs().add(tab);
-
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
+        tabs = createTabs();
+        tabPane.getTabs().addAll(tabs.keySet());
     }
 
     private Tab createTabWithImageViewPane(CarouselTab carouselTab){
@@ -50,7 +38,13 @@ public class Controller {
         imageView.setPreserveRatio(true);
         imageView.setSmooth(true);
         var imageViewPane = new ImageViewPane(imageView);
-        VBox vBox = new VBox(imageViewPane, createTabMenu());
+        VBox vBox = new VBox();
+        try {
+            vBox = FXMLLoader.load(getClass().getResource("/com/example/carouselexperimentone/tab.fxml"));
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        vBox.getChildren().add(0, imageViewPane);
         tab.setContent(vBox);
         VBox.setVgrow(imageViewPane, Priority.ALWAYS);
         return tab;
@@ -83,16 +77,6 @@ public class Controller {
         return iVP.getImageView();
     }
     private Tab getSelectedTab(){ return tabPane.getSelectionModel().getSelectedItem(); }
-    private int updateMenuLabel(){
-        var l = getSelectedTab().getContent();
-
-        return getCarouselTabFromSelectedTab()
-                .getFileList()
-                .stream()
-                .map(Path::toString)
-                .collect(Collectors.toCollection(ArrayList::new))
-                .indexOf(getImageViewFromSelectedTab().getImage().getUrl().toString());
-    }
 //    public void setLeftButton(Event event) {
 //        int i = getCarouselTabFromSelectedTab().getFileList().stream()
 //                .map(Path::toString)

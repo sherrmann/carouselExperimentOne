@@ -4,10 +4,10 @@ import com.example.carouselexperimentone.carouselModel.Carousel;
 import com.example.carouselexperimentone.carouselModel.CarouselTab;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
-import javafx.scene.control.*;
+import javafx.scene.control.Tab;
+import javafx.scene.control.TabPane;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
-import javafx.scene.layout.HBox;
 import javafx.scene.layout.Priority;
 import javafx.scene.layout.VBox;
 
@@ -53,17 +53,14 @@ public class Controller {
         VBox.setVgrow(imageViewPane, Priority.ALWAYS);
         return tab;
     }
-    private HBox createTabMenu(){
-        var hBox =  new HBox(new MenuButton("Menu"), new Button("Left"), new Button("Right"),
-                new Label("test"));
-        hBox.setSpacing(10.0);
-        return hBox;
-        }
+
     private Map<Tab, List<Image>> createTabs(){
         return carousel.getTabs()
                 .stream()
                 .collect(Collectors.toMap(this::createTabWithImageViewPane, this::createImages, (u,v) -> u, LinkedHashMap::new));
     }
+
+
     private List<Image> createImages(CarouselTab t){
         return t.getFileList().stream()
                 .map(p -> new Image(p.toString()))

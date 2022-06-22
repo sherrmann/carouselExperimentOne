@@ -31,7 +31,8 @@ public class TabController {
     }
 
     private int getCurrentImageIndex(){
-        return carouselTab.getFileList().indexOf(Path.of(imageView.getImage().getUrl().toString()));
+        return carouselTab.getFileList().indexOf(
+                Path.of(imageView.getImage().getUrl()));
     }
 
 }

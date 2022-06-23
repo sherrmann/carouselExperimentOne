@@ -44,12 +44,13 @@ public class CarouselTab{
     }
 
     public void addFile(Path path) {
-        // TODO: save File
+        // TODO: save File in right directory
         try {
-            Files.copy(path, Paths.get(System.getProperty("user.home")+ "/test/test.jpg"));
+            Files.copy(path, Paths.get(tabPath.toString() + "\\" + path.getFileName()));
         } catch (IOException e) {
             e.printStackTrace();
         }
+
         this.fileList = getFilesInTabFolder(this.tabPath);
         Collections.sort(fileList);
     }

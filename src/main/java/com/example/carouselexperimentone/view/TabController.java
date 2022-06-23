@@ -27,7 +27,6 @@ public class TabController {
         if(i > 0){
             imageView.setImage(  new Image(  carouselTab.getFileList().get(--i).toString()));
         }
-        System.out.println("left");
     }
     @FXML
     private void rightButton(){
@@ -35,7 +34,6 @@ public class TabController {
         if(i < carouselTab.getFileList().size() - 1 ){
             imageView.setImage(  new Image(  carouselTab.getFileList().get(++i).toString()));
         }
-        System.out.println("right");
     }
     @FXML
     private void refreshCarousel(){ controller.refreshCarousel(); }
@@ -46,6 +44,7 @@ public class TabController {
         fileChooser.setInitialDirectory(new File(System.getProperty("user.home")));
         File file = fileChooser.showOpenDialog(tabRootVBox.getScene().getWindow());
         carouselTab.addFile(file.toPath());
+        refreshCarousel();
     }
 
     private ImageViewPane makeImageViewPane(){

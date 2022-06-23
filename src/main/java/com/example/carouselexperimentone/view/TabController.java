@@ -2,6 +2,7 @@ package com.example.carouselexperimentone.view;
 
 import com.example.carouselexperimentone.carouselModel.CarouselTab;
 import javafx.fxml.FXML;
+import javafx.scene.control.Label;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.Priority;
@@ -16,10 +17,17 @@ public class TabController {
     public CarouselTab carouselTab;
     @FXML
     private VBox tabRootVBox;
+    @FXML
+    private Label documentName;
     private ImageView imageView;
 
     public void initialize(){
-        tabRootVBox.getChildren().add(0, makeImageViewPane());
+        tabRootVBox.getChildren().add(0, createImageViewPane());
+        imageView.imageProperty().addListener(((observable, oldImage, newImage) ->
+                documentName.setText(
+                        String.valueOf(
+                                Path.of(newImage.getUrl())
+                                .getFileName()))));
     }
     @FXML
     private void leftButton(){
@@ -36,8 +44,6 @@ public class TabController {
         }
     }
     @FXML
-    private void refreshCarousel(){ controller.refreshCarousel(); }
-    @FXML
     private void addDocument(){
         FileChooser fileChooser = new FileChooser();
         fileChooser.setTitle("Add a document");
@@ -45,11 +51,11 @@ public class TabController {
         File file = fileChooser.showOpenDialog(tabRootVBox.getScene().getWindow());
         if(file != null && file.exists()) {
             carouselTab.addFile(file.toPath());
-            refreshCarousel();
+            controller.refreshCarousel();
         }
     }
 
-    private ImageViewPane makeImageViewPane(){
+    private ImageViewPane createImageViewPane(){
         imageView = new ImageView(carouselTab.getFileList().get(0).toString());
         imageView.setPreserveRatio(true);
         imageView.setSmooth(true);

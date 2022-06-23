@@ -3,8 +3,10 @@ package com.example.carouselexperimentone.carouselModel;
 import lombok.Data;
 import lombok.NonNull;
 
+import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Path;
+import java.nio.file.Paths;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
@@ -41,4 +43,14 @@ public class CarouselTab{
         return null;
     }
 
+    public void addFile(Path path) {
+        // TODO: save File
+        try {
+            Files.copy(path, Paths.get(System.getProperty("user.home")+ "/test/test.jpg"));
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        this.fileList = getFilesInTabFolder(this.tabPath);
+        Collections.sort(fileList);
+    }
 }

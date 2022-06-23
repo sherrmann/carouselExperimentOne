@@ -23,11 +23,8 @@ public class TabController {
 
     public void initialize(){
         tabRootVBox.getChildren().add(0, createImageViewPane());
-        imageView.imageProperty().addListener(((observable, oldImage, newImage) ->
-                documentName.setText(
-                        String.valueOf(
-                                Path.of(newImage.getUrl())
-                                .getFileName()))));
+        imageView.imageProperty().addListener(((observable, oldImage, newImage) -> updateDocumentFileName(newImage)));
+        updateDocumentFileName(imageView.getImage());
     }
     @FXML
     private void leftButton(){
@@ -67,6 +64,14 @@ public class TabController {
     private int getCurrentImageIndex(){
         return carouselTab.getFileList().indexOf(
                 Path.of(imageView.getImage().getUrl()));
+    }
+
+    private void updateDocumentFileName(Image image){
+        documentName.setText(
+                Path.of(image.getUrl())
+                        .getFileName()
+                        .toString()
+        );
     }
 
     public TabController(CarouselTab carouselTab, Controller controller) {

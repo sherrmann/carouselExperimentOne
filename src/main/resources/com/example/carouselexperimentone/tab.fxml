@@ -3,6 +3,7 @@
 <?import javafx.geometry.*?>
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
+<?import javafx.scene.text.*?>
 
 <VBox fx:id="tabRootVBox" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/16" xmlns:fx="http://javafx.com/fxml/1">
     <HBox spacing="5.0" VBox.vgrow="NEVER">
@@ -15,7 +16,10 @@
         <Button minWidth="50.0" onAction="#leftButton" text="&lt;--" />
         <Button minWidth="50.0" onAction="#rightButton" text="--&gt;" />
       <Button layoutX="188.0" layoutY="10.0" minWidth="50.0" onAction="#addDocument" text="add document" />
-      <Label fx:id="documentName" text="Label" />
+      <Label fx:id="documentName" text="Label">
+         <font>
+            <Font size="16.0" />
+         </font></Label>
       <VBox.margin>
          <Insets bottom="5.0" left="10.0" right="10.0" top="5.0" />
       </VBox.margin>

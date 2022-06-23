@@ -10,6 +10,7 @@ import javafx.scene.layout.VBox;
 import java.nio.file.Path;
 
 public class TabController {
+    private Controller controller;
     public CarouselTab carouselTab;
     @FXML
     private VBox tabRootVBox;
@@ -34,6 +35,8 @@ public class TabController {
         }
         System.out.println("right");
     }
+    @FXML
+    private void refreshCarousel(){ controller.refreshCarousel(); }
 
     private ImageViewPane makeImageViewPane(){
         imageView = new ImageView(carouselTab.getFileList().get(0).toString());
@@ -49,5 +52,8 @@ public class TabController {
                 Path.of(imageView.getImage().getUrl()));
     }
 
-    public TabController(CarouselTab carouselTab) { this.carouselTab = carouselTab; }
+    public TabController(CarouselTab carouselTab, Controller controller) {
+        this.carouselTab = carouselTab;
+        this.controller = controller;
+    }
 }

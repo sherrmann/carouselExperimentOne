@@ -14,6 +14,7 @@
         </MenuButton>
         <Button fx:id="leftButton" minWidth="50.0" mnemonicParsing="false" onAction="#leftButton" text="&lt;--" />
         <Button fx:id="rightButton" minWidth="50.0" mnemonicParsing="false" onAction="#rightButton" text="--&gt;" />
+        <Button fx:id="refresh" minWidth="50.0" mnemonicParsing="false" onAction="#refreshCarousel" text="Refresh" />
       <VBox.margin>
          <Insets bottom="5.0" left="10.0" right="10.0" top="5.0" />
       </VBox.margin>

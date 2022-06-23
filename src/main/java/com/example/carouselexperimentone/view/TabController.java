@@ -43,8 +43,10 @@ public class TabController {
         fileChooser.setTitle("Add a document");
         fileChooser.setInitialDirectory(new File(System.getProperty("user.home")));
         File file = fileChooser.showOpenDialog(tabRootVBox.getScene().getWindow());
-        carouselTab.addFile(file.toPath());
-        refreshCarousel();
+        if(file != null && file.exists()) {
+            carouselTab.addFile(file.toPath());
+            refreshCarousel();
+        }
     }
 
     private ImageViewPane makeImageViewPane(){

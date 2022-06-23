@@ -6,6 +6,7 @@ import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.Priority;
 import javafx.scene.layout.VBox;
+import javafx.stage.FileChooser;
 
 import java.nio.file.Path;
 
@@ -37,6 +38,12 @@ public class TabController {
     }
     @FXML
     private void refreshCarousel(){ controller.refreshCarousel(); }
+    @FXML
+    private void addDocument(){
+        FileChooser f = new FileChooser();
+        f.setTitle("Add a document");
+        f.showOpenDialog(tabRootVBox.getScene().getWindow());
+    }
 
     private ImageViewPane makeImageViewPane(){
         imageView = new ImageView(carouselTab.getFileList().get(0).toString());

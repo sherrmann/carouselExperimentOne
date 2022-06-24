@@ -71,6 +71,8 @@ public class TabController {
                 Path.of(image.getUrl())
                         .getFileName()
                         .toString()
+                        .split("\\.")[0]
+
         );
     }
 

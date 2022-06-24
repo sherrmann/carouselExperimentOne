@@ -4,8 +4,10 @@ import com.example.carouselexperimentone.carouselModel.Carousel;
 import com.example.carouselexperimentone.carouselModel.CarouselTab;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
+import javafx.scene.control.MenuButton;
 import javafx.scene.control.Tab;
 import javafx.scene.control.TabPane;
+import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
 
 import java.nio.file.Path;
@@ -25,6 +27,16 @@ public class Controller {
     public void initialize() {
         tabs = createListOfTabs(carousel);
         tabPane.getTabs().addAll(tabs);
+        tabPane.setFocusTraversable(false);
+        tabPane.focusedProperty().addListener((observable, old, hasFocus) -> {
+            if(hasFocus) {
+                Tab selectedTab = tabPane.getSelectionModel().getSelectedItem();
+                VBox vBox = (VBox) selectedTab.getContent();
+                HBox hBox = (HBox) vBox.getChildren().get(1);
+                MenuButton menu = (MenuButton) hBox.getChildren().get(0);
+                menu.requestFocus();
+            }
+        });
     }
 
     public void refreshCarousel(){

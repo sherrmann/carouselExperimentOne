@@ -3,6 +3,7 @@ package com.example.carouselexperimentone.view;
 import com.example.carouselexperimentone.carouselModel.CarouselTab;
 import javafx.fxml.FXML;
 import javafx.scene.control.Label;
+import javafx.scene.control.MenuButton;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.Priority;
@@ -19,6 +20,8 @@ public class TabController {
     private VBox tabRootVBox;
     @FXML
     private Label documentName;
+    @FXML
+    MenuButton menuButton;
     private ImageView imageView;
 
     public void initialize(){

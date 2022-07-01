@@ -6,6 +6,8 @@ import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.control.Tab;
 import javafx.scene.control.TabPane;
+import javafx.scene.input.KeyCode;
+import javafx.scene.input.KeyEvent;
 import javafx.scene.layout.VBox;
 
 import java.nio.file.Path;
@@ -26,6 +28,19 @@ public class Controller {
         tabsAndControllers = createListOfTabs(carousel);
         tabPane.getTabs().addAll(tabsAndControllers.keySet());
         tabPane.setFocusTraversable(false);
+        tabPane.addEventFilter(KeyEvent.KEY_PRESSED, event -> {
+                    if(event.getCode() == KeyCode.LEFT) {
+                        tabsAndControllers.get(tabPane.getSelectionModel().getSelectedItem()).leftButton.fire();
+                        event.consume();
+                    }
+                    if(event.getCode() == KeyCode.RIGHT) {
+                        tabsAndControllers.get(tabPane.getSelectionModel().getSelectedItem()).rightButton.fire();
+                        event.consume();
+                    }
+                    if(event.getCode() == KeyCode.UP) event.consume();
+                    if(event.getCode() == KeyCode.DOWN) event.consume();
+                });
+
         // filter KeyEvents in vBox (alternative tabPane) and send event to selectedTab
 //        defaultVBox.addEventFilter(KeyEvent.ANY, event -> {
 //            System.out.println("inside EventFilter in Controller: " + event.getCode() );

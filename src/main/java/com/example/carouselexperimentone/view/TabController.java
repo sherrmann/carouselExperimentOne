@@ -2,6 +2,7 @@ package com.example.carouselexperimentone.view;
 
 import com.example.carouselexperimentone.carouselModel.CarouselTab;
 import javafx.fxml.FXML;
+import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.MenuButton;
 import javafx.scene.image.Image;
@@ -22,6 +23,11 @@ public class TabController {
     private Label documentName;
     @FXML
     MenuButton menuButton;
+    @FXML
+    Button leftButton;
+    @FXML
+    Button rightButton;
+
     private ImageView imageView;
 
     public void initialize(){
@@ -30,18 +36,20 @@ public class TabController {
         updateDocumentFileName(imageView.getImage());
     }
     @FXML
-    private void leftButton(){
+    void leftButton(){
         int i = getCurrentImageIndex();
         if(i > 0){
             imageView.setImage(  new Image(  carouselTab.getFileList().get(--i).toString()));
         }
+        System.out.println("Left, imageIndex: " + getCurrentImageIndex());
     }
     @FXML
-    private void rightButton(){
+    void rightButton(){
         int i = getCurrentImageIndex();
         if(i < carouselTab.getFileList().size() - 1 ){
             imageView.setImage(  new Image(  carouselTab.getFileList().get(++i).toString()));
         }
+        System.out.println("right, imageIndex: " + getCurrentImageIndex());
     }
     @FXML
     private void addDocument(){

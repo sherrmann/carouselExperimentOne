@@ -4,66 +4,72 @@ import com.example.carouselexperimentone.carouselModel.Carousel;
 import com.example.carouselexperimentone.carouselModel.CarouselTab;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
-import javafx.scene.control.MenuButton;
 import javafx.scene.control.Tab;
 import javafx.scene.control.TabPane;
-import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
 
 import java.nio.file.Path;
 import java.nio.file.Paths;
-import java.util.ArrayList;
-import java.util.List;
+import java.util.AbstractMap;
+import java.util.LinkedHashMap;
 import java.util.stream.Collectors;
 
 public class Controller {
     private Carousel carousel;
-    private List<Tab> tabs;
+    private LinkedHashMap<Tab, TabController> tabsAndControllers;
     @FXML
     VBox defaultVBox; // top level VBox
     @FXML
     TabPane tabPane;
 
     public void initialize() {
-        tabs = createListOfTabs(carousel);
-        tabPane.getTabs().addAll(tabs);
+        tabsAndControllers = createListOfTabs(carousel);
+        tabPane.getTabs().addAll(tabsAndControllers.keySet());
         tabPane.setFocusTraversable(false);
-        tabPane.focusedProperty().addListener((observable, old, hasFocus) -> {
-            if(hasFocus) {
-                Tab selectedTab = tabPane.getSelectionModel().getSelectedItem();
-                VBox vBox = (VBox) selectedTab.getContent();
-                HBox hBox = (HBox) vBox.getChildren().get(1);
-                MenuButton menu = (MenuButton) hBox.getChildren().get(0);
-                menu.requestFocus();
-            }
-        });
+        // filter KeyEvents in vBox (alternative tabPane) and send event to selectedTab
+//        defaultVBox.addEventFilter(KeyEvent.ANY, event -> {
+//            System.out.println("inside EventFilter in Controller: " + event.getCode() );
+//            tabs.get(tabPane.getSelectionModel().getSelectedIndex()).getContent().requestFocus();
+//            event.consume();
+//        });
+//        tabPane.focusedProperty().addListener((observable, old, hasFocus) -> {
+//            if(hasFocus) {
+//                Tab selectedTab = tabPane.getSelectionModel().getSelectedItem();
+//                VBox vBox = (VBox) selectedTab.getContent();
+//                HBox hBox = (HBox) vBox.getChildren().get(1);
+//                MenuButton menu = (MenuButton) hBox.getChildren().get(0);
+//                menu.requestFocus();
+//            }
+//        });
     }
 
     public void refreshCarousel(){
-        tabPane.getTabs().removeAll(tabs);
-        tabs = createListOfTabs(carousel);
-        tabPane.getTabs().addAll(tabs);
+        tabPane.getTabs().removeAll(tabsAndControllers.keySet());
+        tabsAndControllers = createListOfTabs(carousel);
+        tabPane.getTabs().addAll(tabsAndControllers.keySet());
     }
     // Generates a Tab with a VBox, loads FXML, adds a TabController with carouselTab reference
-    private Tab createTab(CarouselTab carouselTab){
+    private AbstractMap.SimpleEntry<Tab, TabController> createTab(CarouselTab carouselTab){
         var tab = new Tab(carouselTab.getTabName());
+        var tabController = new TabController(carouselTab,this);
         VBox vBox = new VBox();
         try {
             var loader = new FXMLLoader(getClass().getResource("/com/example/carouselexperimentone/tab.fxml"));
-            loader.setController(new TabController(carouselTab, this));
+            loader.setController(tabController);
             vBox = loader.load();
         } catch (Exception e) {
             e.printStackTrace();
         }
         tab.setContent(vBox);
-        return tab;
+        return new AbstractMap.SimpleEntry<>(tab, tabController);
     }
 
-    private List<Tab> createListOfTabs(Carousel carousel){
+    private LinkedHashMap<Tab, TabController> createListOfTabs(Carousel carousel){
         return carousel.getTabs()
                 .stream()
                 .map(this::createTab)
-                .collect(Collectors.toCollection(ArrayList::new));
+                .collect(Collectors.toMap(AbstractMap.SimpleEntry::getKey, AbstractMap.SimpleEntry::getValue,
+                        (k,v) -> v, LinkedHashMap::new));
     }
 
     public Controller() {

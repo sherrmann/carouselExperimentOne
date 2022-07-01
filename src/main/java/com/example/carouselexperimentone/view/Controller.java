@@ -29,17 +29,28 @@ public class Controller {
         tabPane.getTabs().addAll(tabsAndControllers.keySet());
         tabPane.setFocusTraversable(false);
         tabPane.addEventFilter(KeyEvent.KEY_PRESSED, event -> {
-                    if(event.getCode() == KeyCode.LEFT) {
-                        tabsAndControllers.get(tabPane.getSelectionModel().getSelectedItem()).leftButton.fire();
-                        event.consume();
-                    }
-                    if(event.getCode() == KeyCode.RIGHT) {
-                        tabsAndControllers.get(tabPane.getSelectionModel().getSelectedItem()).rightButton.fire();
-                        event.consume();
-                    }
-                    if(event.getCode() == KeyCode.UP) event.consume();
-                    if(event.getCode() == KeyCode.DOWN) event.consume();
-                });
+            if (event.getCode() == KeyCode.LEFT) {
+                tabsAndControllers.get(tabPane.getSelectionModel().getSelectedItem()).leftButton.fire();
+                event.consume();
+            }
+            if (event.getCode() == KeyCode.RIGHT) {
+                tabsAndControllers.get(tabPane.getSelectionModel().getSelectedItem()).rightButton.fire();
+                event.consume();
+            }
+            if (event.getCode() == KeyCode.UP) {
+                int i = tabPane.getSelectionModel().getSelectedIndex();
+                if(--i < 0) i = tabPane.getTabs().size() - 1;
+                tabPane.getSelectionModel().select(i);
+                event.consume();
+            }
+
+            if (event.getCode() == KeyCode.DOWN){
+                int i = tabPane.getSelectionModel().getSelectedIndex();
+                if(++i > tabPane.getTabs().size() - 1) i = 0;
+                tabPane.getSelectionModel().select(i);
+                event.consume();
+            }
+        });
 
         // filter KeyEvents in vBox (alternative tabPane) and send event to selectedTab
 //        defaultVBox.addEventFilter(KeyEvent.ANY, event -> {
@@ -58,15 +69,16 @@ public class Controller {
 //        });
     }
 
-    public void refreshCarousel(){
+    public void refreshCarousel() {
         tabPane.getTabs().removeAll(tabsAndControllers.keySet());
         tabsAndControllers = createListOfTabs(carousel);
         tabPane.getTabs().addAll(tabsAndControllers.keySet());
     }
+
     // Generates a Tab with a VBox, loads FXML, adds a TabController with carouselTab reference
-    private AbstractMap.SimpleEntry<Tab, TabController> createTab(CarouselTab carouselTab){
+    private AbstractMap.SimpleEntry<Tab, TabController> createTab(CarouselTab carouselTab) {
         var tab = new Tab(carouselTab.getTabName());
-        var tabController = new TabController(carouselTab,this);
+        var tabController = new TabController(carouselTab, this);
         VBox vBox = new VBox();
         try {
             var loader = new FXMLLoader(getClass().getResource("/com/example/carouselexperimentone/tab.fxml"));
@@ -79,12 +91,12 @@ public class Controller {
         return new AbstractMap.SimpleEntry<>(tab, tabController);
     }
 
-    private LinkedHashMap<Tab, TabController> createListOfTabs(Carousel carousel){
+    private LinkedHashMap<Tab, TabController> createListOfTabs(Carousel carousel) {
         return carousel.getTabs()
                 .stream()
                 .map(this::createTab)
                 .collect(Collectors.toMap(AbstractMap.SimpleEntry::getKey, AbstractMap.SimpleEntry::getValue,
-                        (k,v) -> v, LinkedHashMap::new));
+                        (k, v) -> v, LinkedHashMap::new));
     }
 
     public Controller() {

@@ -41,7 +41,6 @@ public class TabController {
         if(i > 0){
             imageView.setImage(  new Image(  carouselTab.getFileList().get(--i).toString()));
         }
-        System.out.println("Left, imageIndex: " + getCurrentImageIndex());
     }
     @FXML
     void rightButton(){
@@ -49,7 +48,6 @@ public class TabController {
         if(i < carouselTab.getFileList().size() - 1 ){
             imageView.setImage(  new Image(  carouselTab.getFileList().get(++i).toString()));
         }
-        System.out.println("right, imageIndex: " + getCurrentImageIndex());
     }
     @FXML
     private void addDocument(){

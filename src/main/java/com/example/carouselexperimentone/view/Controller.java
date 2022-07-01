@@ -39,15 +39,13 @@ public class Controller {
             }
             if (event.getCode() == KeyCode.UP) {
                 int i = tabPane.getSelectionModel().getSelectedIndex();
-                if(--i < 0) i = tabPane.getTabs().size() - 1;
-                tabPane.getSelectionModel().select(i);
+                if(i > 0) tabPane.getSelectionModel().select(--i);
                 event.consume();
             }
 
             if (event.getCode() == KeyCode.DOWN){
                 int i = tabPane.getSelectionModel().getSelectedIndex();
-                if(++i > tabPane.getTabs().size() - 1) i = 0;
-                tabPane.getSelectionModel().select(i);
+                if(i < tabPane.getTabs().size() - 1) tabPane.getSelectionModel().select(i + 1);
                 event.consume();
             }
         });

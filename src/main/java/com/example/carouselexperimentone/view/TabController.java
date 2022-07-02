@@ -31,7 +31,7 @@ public class TabController {
     private ImageView imageView;
 
     public void initialize(){
-        tabRootVBox.getChildren().add(0, createImageViewPane());
+        tabRootVBox.getChildren().add(0, createImageViewPane()); // insert IVP at the first position
         imageView.imageProperty().addListener(((observable, oldImage, newImage) -> updateDocumentFileName(newImage)));
         updateDocumentFileName(imageView.getImage());
     }
@@ -54,6 +54,8 @@ public class TabController {
         FileChooser fileChooser = new FileChooser();
         fileChooser.setTitle("Add a document");
         fileChooser.setInitialDirectory(new File(System.getProperty("user.home")));
+        fileChooser.getExtensionFilters().add(
+                new FileChooser.ExtensionFilter("Images JPEG, GIF, PNG, BMP","BMP", "GIF", "JPEG", "JPG", "PNG"));
         File file = fileChooser.showOpenDialog(tabRootVBox.getScene().getWindow());
         if(file != null && file.exists()) {
             carouselTab.addFile(file.toPath());

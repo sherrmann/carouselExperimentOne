@@ -17,7 +17,7 @@ import java.util.LinkedHashMap;
 import java.util.stream.Collectors;
 
 public class Controller {
-    private Carousel carousel;
+    private Carousel docCarousel;
     private LinkedHashMap<Tab, TabController> tabsAndControllers;
     @FXML
     VBox defaultVBox; // top level VBox
@@ -25,9 +25,8 @@ public class Controller {
     TabPane tabPane;
 
     public void initialize() {
-        tabsAndControllers = createListOfTabs(carousel);
+        tabsAndControllers = createListOfTabs(docCarousel);
         tabPane.getTabs().addAll(tabsAndControllers.keySet());
-        tabPane.setFocusTraversable(false);
         tabPane.addEventFilter(KeyEvent.KEY_PRESSED, event -> {
             if (event.getCode() == KeyCode.LEFT) {
                 tabsAndControllers.get(tabPane.getSelectionModel().getSelectedItem()).leftButton.fire();
@@ -42,38 +41,26 @@ public class Controller {
                 if(i > 0) tabPane.getSelectionModel().select(--i);
                 event.consume();
             }
-
             if (event.getCode() == KeyCode.DOWN){
                 int i = tabPane.getSelectionModel().getSelectedIndex();
                 if(i < tabPane.getTabs().size() - 1) tabPane.getSelectionModel().select(i + 1);
                 event.consume();
             }
         });
-
-        // filter KeyEvents in vBox (alternative tabPane) and send event to selectedTab
-//        defaultVBox.addEventFilter(KeyEvent.ANY, event -> {
-//            System.out.println("inside EventFilter in Controller: " + event.getCode() );
-//            tabs.get(tabPane.getSelectionModel().getSelectedIndex()).getContent().requestFocus();
-//            event.consume();
-//        });
-//        tabPane.focusedProperty().addListener((observable, old, hasFocus) -> {
-//            if(hasFocus) {
-//                Tab selectedTab = tabPane.getSelectionModel().getSelectedItem();
-//                VBox vBox = (VBox) selectedTab.getContent();
-//                HBox hBox = (HBox) vBox.getChildren().get(1);
-//                MenuButton menu = (MenuButton) hBox.getChildren().get(0);
-//                menu.requestFocus();
-//            }
-//        });
     }
 
     public void refreshCarousel() {
         tabPane.getTabs().removeAll(tabsAndControllers.keySet());
-        tabsAndControllers = createListOfTabs(carousel);
+        tabsAndControllers = createListOfTabs(docCarousel);
         tabPane.getTabs().addAll(tabsAndControllers.keySet());
     }
 
-    // Generates a Tab with a VBox, loads FXML, adds a TabController with carouselTab reference
+    // Returns a Tab with a VBox, loads FXML, adds a TabController with carouselTab reference
+
+    /**
+     * @param carouselTab Content of the Tab
+     * @return A JavaFX Tab wrapped in an Entry
+     */
     private AbstractMap.SimpleEntry<Tab, TabController> createTab(CarouselTab carouselTab) {
         var tab = new Tab(carouselTab.getTabName());
         var tabController = new TabController(carouselTab, this);
@@ -99,6 +86,6 @@ public class Controller {
 
     public Controller() {
         Path path = Paths.get("C:\\Users\\bubuf\\OneDrive - The Open University\\Documents\\DocumentCarousel\\Carousel1\\");
-        this.carousel = new Carousel(path);
+        this.docCarousel = new Carousel(path);
     }
 }

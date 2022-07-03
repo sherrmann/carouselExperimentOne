@@ -19,14 +19,13 @@ public class CarouselTab{
     private String tabName;
     @NonNull
     private Path tabPath;
-    @NonNull
     private List<Path> fileList;
 
     public CarouselTab (String tabName, Path tabPath){
         this.tabName = tabName;
         this.tabPath = tabPath;
         this.fileList = getFilesInTabFolder(this.tabPath);
-        Collections.sort(fileList);
+        if(!(fileList == null)) Collections.sort(fileList);
     }
 
     // scan tab directory for images
@@ -46,12 +45,20 @@ public class CarouselTab{
     public void addFile(Path path) {
         // TODO: save File in right directory
         try {
-            Files.copy(path, Paths.get(tabPath.toString() + "\\" + path.getFileName()));
+            Files.copy(path, Paths.get(tabPath + "\\" + path.getFileName()));
         } catch (IOException e) {
             e.printStackTrace();
         }
 
         this.fileList = getFilesInTabFolder(this.tabPath);
-        Collections.sort(fileList);
+        if(!(fileList == null)) Collections.sort(fileList);
+    }
+
+    public List<Path> getFileList() {
+        return Collections.unmodifiableList(fileList);
+    }
+
+    public void setFileList(List<Path> fileList){
+        this.fileList = new ArrayList<>(fileList);
     }
 }

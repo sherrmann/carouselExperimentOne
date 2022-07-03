@@ -6,6 +6,7 @@ import lombok.NonNull;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.Comparator;
 import java.util.List;
 import java.util.stream.Collectors;
@@ -38,5 +39,13 @@ public class Carousel {
             e.printStackTrace();
         }
         return null;
+    }
+
+    public List<CarouselTab> getTabs() {
+        return Collections.unmodifiableList(tabs);
+    }
+
+    public void setTabs(List<CarouselTab> tabs) {
+        this.tabs = new ArrayList<>(tabs);
     }
 }

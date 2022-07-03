@@ -15,8 +15,8 @@ import java.io.File;
 import java.nio.file.Path;
 
 public class TabController {
-    private Controller controller;
-    public CarouselTab carouselTab;
+    private final Controller controller;
+    private final CarouselTab carouselTab;
     @FXML
     private VBox tabRootVBox;
     @FXML

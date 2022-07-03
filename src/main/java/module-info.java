@@ -9,7 +9,6 @@ module com.example.carouselexperimentone {
     requires org.kordamp.ikonli.javafx;
     requires org.kordamp.bootstrapfx.core;
     requires eu.hansolo.tilesfx;
-    requires commons.vfs2;
     requires lombok;
 
     opens com.example.carouselexperimentone to javafx.fxml;

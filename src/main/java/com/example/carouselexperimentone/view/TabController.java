@@ -81,7 +81,10 @@ public class TabController {
     }
 
     private ImageViewPane createImageViewPane(){
-        imageView = new ImageView(carouselTab.getFileList().get(0).toString());
+        Image image = null;
+        if(!(carouselTab.getFileList().isEmpty())) image = new Image( carouselTab.getFileList().get(0).toString() );
+        imageView = new ImageView();
+        imageView.setImage(image);
         imageView.setPreserveRatio(true);
         imageView.setSmooth(true);
         ImageViewPane iVP =  new ImageViewPane(imageView);
@@ -90,11 +93,16 @@ public class TabController {
     }
 
     private int getCurrentImageIndex(){
+        if(carouselTab.getFileList().isEmpty()) return -1;
         return carouselTab.getFileList().indexOf(
                 Path.of(imageView.getImage().getUrl()));
     }
 
     private void updateDocumentFileName(Image image){
+        if(image == null){
+            documentName.setText("");
+            return;
+        }
         documentName.setText(
                 Path.of(image.getUrl())
                         .getFileName()

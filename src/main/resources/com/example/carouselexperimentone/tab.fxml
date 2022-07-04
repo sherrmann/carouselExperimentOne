@@ -16,6 +16,7 @@
         <Button fx:id="leftButton" minWidth="50.0" onAction="#leftButton" text="&lt;--" />
         <Button fx:id="rightButton" minWidth="50.0" onAction="#rightButton" text="--&gt;" />
       <Button layoutX="188.0" layoutY="10.0" minWidth="50.0" onAction="#addDocument" text="add document" />
+      <Button layoutX="188.0" layoutY="10.0" minWidth="50.0" onAction="#deleteDocument" text="remove document" />
       <Label fx:id="documentName" text="Label">
          <font>
             <Font size="16.0" />

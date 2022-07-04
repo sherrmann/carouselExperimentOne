@@ -54,6 +54,14 @@ public class CarouselTab{
         if(!(fileList == null)) Collections.sort(fileList);
     }
 
+    public void deleteFile(Path path) {
+        try{
+            Files.deleteIfExists(path);
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+
     public List<Path> getFileList() {
         return Collections.unmodifiableList(fileList);
     }

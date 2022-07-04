@@ -63,6 +63,23 @@ public class TabController {
         }
     }
 
+    @FXML
+    private void deleteDocument(){
+        int index = getCurrentImageIndex();
+        carouselTab.deleteFile(
+                carouselTab.getFileList()
+                        .get(index) );
+        //
+        Image image = null;
+        if(!(carouselTab.getFileList().isEmpty())){
+            if(index >= carouselTab.getFileList().size() - 1 ){
+                --index;
+            }
+            image = new Image( carouselTab.getFileList().get(index).toString() );
+        }
+        imageView.setImage(image);
+    }
+
     private ImageViewPane createImageViewPane(){
         imageView = new ImageView(carouselTab.getFileList().get(0).toString());
         imageView.setPreserveRatio(true);

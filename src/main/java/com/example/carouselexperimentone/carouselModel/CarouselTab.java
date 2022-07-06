@@ -57,6 +57,7 @@ public class CarouselTab{
     public void deleteFile(Path path) {
         try{
             Files.deleteIfExists(path);
+            fileList.remove(path);
         } catch (IOException e) {
             e.printStackTrace();
         }

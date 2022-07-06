@@ -66,18 +66,20 @@ public class TabController {
     @FXML
     private void deleteDocument(){
         int index = getCurrentImageIndex();
+        Image image = null;
         carouselTab.deleteFile(
                 carouselTab.getFileList()
                         .get(index) );
-        //
-        Image image = null;
-        if(!(carouselTab.getFileList().isEmpty())){
-            if(index >= carouselTab.getFileList().size() - 1 ){
-                --index;
-            }
-            image = new Image( carouselTab.getFileList().get(index).toString() );
-        }
-        imageView.setImage(image);
+
+        // reduce index to prevent outOfBoundsError
+        if(index >= carouselTab.getFileList().size()) --index;
+
+        // Here's where the problem starts
+        System.out.println(carouselTab.getFileList().get(index).toString());
+        System.out.println(carouselTab.getFileList().get(0).toString());
+        imageView.setImage(new Image(carouselTab.getFileList().get(index).toString()));
+
+
     }
 
     private ImageViewPane createImageViewPane(){
@@ -93,7 +95,6 @@ public class TabController {
     }
 
     private int getCurrentImageIndex(){
-        if(carouselTab.getFileList().isEmpty()) return -1;
         return carouselTab.getFileList().indexOf(
                 Path.of(imageView.getImage().getUrl()));
     }

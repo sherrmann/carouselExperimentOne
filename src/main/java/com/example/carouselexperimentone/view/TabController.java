@@ -18,23 +18,28 @@ public class TabController {
     private final Controller controller;
     private final CarouselTab carouselTab;
     @FXML
-    private VBox tabRootVBox;
-    @FXML
-    private Label documentName;
-    @FXML
     MenuButton menuButton;
     @FXML
     Button leftButton;
     @FXML
     Button rightButton;
-
+    @FXML
+    private VBox tabRootVBox;
+    @FXML
+    private Label documentName;
     private ImageView imageView;
+
+    public TabController(CarouselTab carouselTab, Controller controller) {
+        this.carouselTab = carouselTab;
+        this.controller = controller;
+    }
 
     public void initialize(){
         tabRootVBox.getChildren().add(0, createImageViewPane()); // insert IVP at the first position
         imageView.imageProperty().addListener(((observable, oldImage, newImage) -> updateDocumentFileName(newImage)));
         updateDocumentFileName(imageView.getImage());
     }
+
     @FXML
     void leftButton(){
         int i = getCurrentImageIndex();
@@ -42,6 +47,7 @@ public class TabController {
             imageView.setImage(  new Image(  carouselTab.getFileList().get(--i).toString()));
         }
     }
+
     @FXML
     void rightButton(){
         int i = getCurrentImageIndex();
@@ -49,6 +55,7 @@ public class TabController {
             imageView.setImage(  new Image(  carouselTab.getFileList().get(++i).toString()));
         }
     }
+
     @FXML
     private void addDocument(){
         FileChooser fileChooser = new FileChooser();
@@ -70,16 +77,9 @@ public class TabController {
         carouselTab.deleteFile(
                 carouselTab.getFileList()
                         .get(index) );
-
         // reduce index to prevent outOfBoundsError
         if(index >= carouselTab.getFileList().size()) --index;
-
-        // Here's where the problem starts
-        System.out.println(carouselTab.getFileList().get(index).toString());
-        System.out.println(carouselTab.getFileList().get(0).toString());
         imageView.setImage(new Image(carouselTab.getFileList().get(index).toString()));
-
-
     }
 
     private ImageViewPane createImageViewPane(){
@@ -111,10 +111,5 @@ public class TabController {
                         .split("\\.")[0]
 
         );
-    }
-
-    public TabController(CarouselTab carouselTab, Controller controller) {
-        this.carouselTab = carouselTab;
-        this.controller = controller;
     }
 }

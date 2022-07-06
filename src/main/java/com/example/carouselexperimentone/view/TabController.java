@@ -74,17 +74,28 @@ public class TabController {
     private void deleteDocument(){
         int index = getCurrentImageIndex();
         Image image = null;
-        carouselTab.deleteFile(
-                carouselTab.getFileList()
-                        .get(index) );
+        if( !(carouselTab.getFileList().isEmpty())
+        && index > -1) {
+            carouselTab.deleteFile(
+                    carouselTab.getFileList()
+                            .get(index));
+        }
         // reduce index to prevent outOfBoundsError
         if(index >= carouselTab.getFileList().size()) --index;
-        imageView.setImage(new Image(carouselTab.getFileList().get(index).toString()));
+        if(index >= 0) imageView.setImage(new Image(carouselTab.getFileList().get(index).toString()));
     }
 
     private ImageViewPane createImageViewPane(){
         Image image = null;
-        if(!(carouselTab.getFileList().isEmpty())) image = new Image( carouselTab.getFileList().get(0).toString() );
+        if(!(carouselTab.getFileList().isEmpty())){
+            // show first Image if available
+            image = new Image( carouselTab.getFileList().get(0).toString() );
+        }
+        else {
+            System.out.println("Show no document image");
+            }
+
+
         imageView = new ImageView();
         imageView.setImage(image);
         imageView.setPreserveRatio(true);
@@ -95,8 +106,13 @@ public class TabController {
     }
 
     private int getCurrentImageIndex(){
-        return carouselTab.getFileList().indexOf(
-                Path.of(imageView.getImage().getUrl()));
+        try {
+            return carouselTab.getFileList().indexOf(
+                    Path.of(imageView.getImage().getUrl()));
+        }
+        catch(Exception e){
+            return -1;
+        }
     }
 
     private void updateDocumentFileName(Image image){

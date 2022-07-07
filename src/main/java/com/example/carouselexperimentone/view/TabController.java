@@ -46,7 +46,7 @@ public class TabController {
     void leftButton(){
         int i = getCurrentImageIndex();
         if(i > 0){
-            imageView.setImage(  new Image(  carouselTab.getFileList().get(--i).toString()));
+            imageView.setImage(getImageFromFileList(--i));
         }
     }
 
@@ -54,7 +54,7 @@ public class TabController {
     void rightButton(){
         int i = getCurrentImageIndex();
         if(i < carouselTab.getFileList().size() - 1 ){
-            imageView.setImage(  new Image(  carouselTab.getFileList().get(++i).toString()));
+            imageView.setImage(getImageFromFileList(++i));
         }
     }
 
@@ -84,35 +84,36 @@ public class TabController {
         }
         // reduce index to prevent outOfBoundsError
         if(index >= carouselTab.getFileList().size()) --index;
-        // show image if index is valid
-        if(index >= 0) imageView.setImage(new Image(carouselTab.getFileList().get(index).toString()));
-        // show no_document if FileList is empty
+
+        imageView.setImage(getImageFromFileList(index));
+    }
+
+    /**
+     *
+     * @param index in carouselTab.FileList
+     * @return Image at position in FileList, returns the no_document Image if FileList is empty or index out of bounds
+     */
+    private Image getImageFromFileList(int index){
+        Image image = null;
         if(carouselTab.getFileList().isEmpty()){
             try {
-                imageView.setImage( new Image( Paths.get(getClass().getResource("/com/example/carouselexperimentone/no_document.png").toURI()).toString()) );
+                image = new Image(
+                        Paths.get(
+                                getClass().getResource("/com/example/carouselexperimentone/no_document.png").
+                                        toURI())
+                                .toString());
             } catch (URISyntaxException | NullPointerException e) {
                 e.printStackTrace();
             }
+        } else if ( !(index < 0 | index > carouselTab.getFileList().size() - 1) ) {
+            image = new Image(carouselTab.getFileList().get(index).toString());
         }
+        return image;
     }
 
     private ImageViewPane createImageViewPane() {
-        Image image = null;
-        if(!(carouselTab.getFileList().isEmpty())){
-            // show first Image if available
-            image = new Image( carouselTab.getFileList().get(0).toString() );
-        }
-        else {
-            try {
-                image = new Image( Paths.get(getClass().getResource("/com/example/carouselexperimentone/no_document.png").toURI()).toString());
-            } catch (URISyntaxException e) {
-                throw new RuntimeException(e);
-            }
-            }
-
-
         imageView = new ImageView();
-        imageView.setImage(image);
+        imageView.setImage(getImageFromFileList(0));
         imageView.setPreserveRatio(true);
         imageView.setSmooth(true);
         ImageViewPane iVP =  new ImageViewPane(imageView);

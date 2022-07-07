@@ -84,7 +84,16 @@ public class TabController {
         }
         // reduce index to prevent outOfBoundsError
         if(index >= carouselTab.getFileList().size()) --index;
+        // show image if index is valid
         if(index >= 0) imageView.setImage(new Image(carouselTab.getFileList().get(index).toString()));
+        // show no_document if FileList is empty
+        if(carouselTab.getFileList().isEmpty()){
+            try {
+                imageView.setImage( new Image( Paths.get(getClass().getResource("/com/example/carouselexperimentone/no_document.png").toURI()).toString()) );
+            } catch (URISyntaxException | NullPointerException e) {
+                e.printStackTrace();
+            }
+        }
     }
 
     private ImageViewPane createImageViewPane() {

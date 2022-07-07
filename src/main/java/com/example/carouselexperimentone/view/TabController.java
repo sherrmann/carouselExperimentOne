@@ -12,7 +12,9 @@ import javafx.scene.layout.VBox;
 import javafx.stage.FileChooser;
 
 import java.io.File;
+import java.net.URISyntaxException;
 import java.nio.file.Path;
+import java.nio.file.Paths;
 
 public class TabController {
     private final Controller controller;
@@ -85,14 +87,18 @@ public class TabController {
         if(index >= 0) imageView.setImage(new Image(carouselTab.getFileList().get(index).toString()));
     }
 
-    private ImageViewPane createImageViewPane(){
+    private ImageViewPane createImageViewPane() {
         Image image = null;
         if(!(carouselTab.getFileList().isEmpty())){
             // show first Image if available
             image = new Image( carouselTab.getFileList().get(0).toString() );
         }
         else {
-            System.out.println("Show no document image");
+            try {
+                image = new Image( Paths.get(getClass().getResource("/com/example/carouselexperimentone/no_document.png").toURI()).toString());
+            } catch (URISyntaxException e) {
+                throw new RuntimeException(e);
+            }
             }
 
 

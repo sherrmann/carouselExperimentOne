@@ -67,6 +67,7 @@ public class Controller {
         VBox vBox = new VBox();
         try {
             var loader = new FXMLLoader(getClass().getResource("/com/example/carouselexperimentone/tab.fxml"));
+            System.out.println(getClass().getResource("/com/example/carouselexperimentone/tab.fxml"));
             loader.setController(tabController);
             vBox = loader.load();
         } catch (Exception e) {

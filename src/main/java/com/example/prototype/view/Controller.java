@@ -46,6 +46,10 @@ public class Controller {
                 if(i < tabPane.getTabs().size() - 1) tabPane.getSelectionModel().select(i + 1);
                 event.consume();
             }
+            if (event.getCode() == KeyCode.DELETE){
+                tabsAndControllers.get(tabPane.getSelectionModel().getSelectedItem()).deleteDocument();
+                event.consume();
+            };
         });
     }
 

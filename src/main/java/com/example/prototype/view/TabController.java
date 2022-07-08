@@ -73,7 +73,7 @@ public class TabController {
     }
 
     @FXML
-    private void deleteDocument(){
+    void deleteDocument(){
         int index = getCurrentImageIndex();
         Image image = null;
         if( !(carouselTab.getFileList().isEmpty())

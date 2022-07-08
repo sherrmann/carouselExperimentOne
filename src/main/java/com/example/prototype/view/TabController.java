@@ -59,7 +59,7 @@ public class TabController {
     }
 
     @FXML
-    private void addDocument(){
+    void addDocument(){
         FileChooser fileChooser = new FileChooser();
         fileChooser.setTitle("Add a document");
         fileChooser.setInitialDirectory(new File(System.getProperty("user.home")));

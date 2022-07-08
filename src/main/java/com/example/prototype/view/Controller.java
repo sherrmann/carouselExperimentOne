@@ -7,6 +7,8 @@ import javafx.fxml.FXMLLoader;
 import javafx.scene.control.Tab;
 import javafx.scene.control.TabPane;
 import javafx.scene.input.KeyCode;
+import javafx.scene.input.KeyCodeCombination;
+import javafx.scene.input.KeyCombination;
 import javafx.scene.input.KeyEvent;
 import javafx.scene.layout.VBox;
 
@@ -23,6 +25,7 @@ public class Controller {
     VBox defaultVBox; // top level VBox
     @FXML
     TabPane tabPane;
+    KeyCombination open = new KeyCodeCombination(KeyCode.O,KeyCombination.CONTROL_DOWN);
 
     public void initialize() {
         tabsAndControllers = createListOfTabs(docCarousel);
@@ -49,7 +52,11 @@ public class Controller {
             if (event.getCode() == KeyCode.DELETE){
                 tabsAndControllers.get(tabPane.getSelectionModel().getSelectedItem()).deleteDocument();
                 event.consume();
-            };
+            }
+            if (open.match(event)){
+                tabsAndControllers.get(tabPane.getSelectionModel().getSelectedItem()).addDocument();
+                event.consume();
+            }
         });
     }
 

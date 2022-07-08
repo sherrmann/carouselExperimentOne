@@ -1,4 +1,4 @@
-package com.example.carouselexperimentone.view;
+package com.example.prototype.view;
 
 /*
  * Copyright (c) 2012, Oracle and/or its affiliates. All rights reserved.

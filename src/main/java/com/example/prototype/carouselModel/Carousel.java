@@ -1,4 +1,4 @@
-package com.example.carouselexperimentone.carouselModel;
+package com.example.prototype.carouselModel;
 
 import lombok.Data;
 import lombok.NonNull;

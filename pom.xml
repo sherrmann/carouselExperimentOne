@@ -120,7 +120,7 @@
                         <id>default-cli</id>
                         <configuration>
                             <mainClass>
-                                com.example.carouselexperimentone/com.example.carouselexperimentone.Main
+                                com.example.carouselexperimentone/com.example.prototype.Main
                             </mainClass>
                             <launcher>app</launcher>
                             <jlinkZipName>app</jlinkZipName>

@@ -1,6 +1,6 @@
-package com.example.carouselexperimentone.view;
+package com.example.prototype.view;
 
-import com.example.carouselexperimentone.carouselModel.CarouselTab;
+import com.example.prototype.carouselModel.CarouselTab;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
@@ -63,8 +63,8 @@ public class TabController {
         FileChooser fileChooser = new FileChooser();
         fileChooser.setTitle("Add a document");
         fileChooser.setInitialDirectory(new File(System.getProperty("user.home")));
-        fileChooser.getExtensionFilters().add(
-                new FileChooser.ExtensionFilter("Images JPEG, GIF, PNG, BMP","BMP", "GIF", "JPEG", "JPG", "PNG"));
+        fileChooser.getExtensionFilters().addAll(
+                new FileChooser.ExtensionFilter("Image Files", "*.png", "*.jpg", "*.gif", "*.bmp"));
         File file = fileChooser.showOpenDialog(tabRootVBox.getScene().getWindow());
         if(file != null && file.exists()) {
             carouselTab.addFile(file.toPath());
@@ -99,7 +99,7 @@ public class TabController {
             try {
                 image = new Image(
                         Paths.get(
-                                getClass().getResource("/com/example/carouselexperimentone/no_document.png").
+                                getClass().getResource("/com/example/prototype/no_document.png").
                                         toURI())
                                 .toString());
             } catch (URISyntaxException | NullPointerException e) {

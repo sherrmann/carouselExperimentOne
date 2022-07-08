@@ -1,7 +1,7 @@
-package com.example.carouselexperimentone.view;
+package com.example.prototype.view;
 
-import com.example.carouselexperimentone.carouselModel.Carousel;
-import com.example.carouselexperimentone.carouselModel.CarouselTab;
+import com.example.prototype.carouselModel.Carousel;
+import com.example.prototype.carouselModel.CarouselTab;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.control.Tab;
@@ -66,7 +66,7 @@ public class Controller {
         var tabController = new TabController(carouselTab, this);
         VBox vBox = new VBox();
         try {
-            var loader = new FXMLLoader(getClass().getResource("/com/example/carouselexperimentone/tab.fxml"));
+            var loader = new FXMLLoader(getClass().getResource("/com/example/prototype/tab.fxml"));
             loader.setController(tabController);
             vBox = loader.load();
         } catch (Exception e) {

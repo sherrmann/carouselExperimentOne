@@ -1,4 +1,4 @@
-package com.example.carouselexperimentone;
+package com.example.prototype;
 
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
